@@ -1,0 +1,517 @@
+{
+  "benchmark_summary": {
+    "total_test_cases": 10,
+    "supported_questions": 8,
+    "unsupported_questions": 2,
+    "top1_retrieval_accuracy_pct": 100.0,
+    "top3_retrieval_accuracy_pct": 100.0,
+    "grounded_answers_passed": 0,
+    "source_traceability_passed": 0,
+    "unsupported_handling_passed": 0
+  },
+  "test_results": [
+    {
+      "test_id": "test_01",
+      "category": "factual",
+      "is_supported": true,
+      "question": "What are the criteria for Stage 2 hypertension?",
+      "expected_pages": [
+        1
+      ],
+      "expected_keywords": [
+        "140",
+        "90"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.6952,
+        0.5223,
+        0.3851
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page1_chunk1",
+          "page_number": 1,
+          "similarity_score": 0.6952,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: HYPERTENSION MANAGEMENT Document ID: MED-REF-2026-01 | Department of Internal Medicine 1. D..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page1_chunk2",
+          "page_number": 1,
+          "similarity_score": 0.5223,
+          "text_snippet": "Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg. 2. Initial Non-Pharmacological Interventions - Dietary Approach..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk3",
+          "page_number": 1,
+          "similarity_score": 0.3851,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    },
+    {
+      "test_id": "test_02",
+      "category": "factual",
+      "is_supported": true,
+      "question": "Why should ACE inhibitors and ARBs not be combined simultaneously in hypertension treatment?",
+      "expected_pages": [
+        1
+      ],
+      "expected_keywords": [
+        "renal",
+        "risk"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.6619,
+        0.4246,
+        0.3739
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page1_chunk3",
+          "page_number": 1,
+          "similarity_score": 0.6619,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page1_chunk2",
+          "page_number": 1,
+          "similarity_score": 0.4246,
+          "text_snippet": "Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg. 2. Initial Non-Pharmacological Interventions - Dietary Approach..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk1",
+          "page_number": 1,
+          "similarity_score": 0.3739,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: HYPERTENSION MANAGEMENT Document ID: MED-REF-2026-01 | Department of Internal Medicine 1. D..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    },
+    {
+      "test_id": "test_03",
+      "category": "diabetes",
+      "is_supported": true,
+      "question": "What are the glycemic targets for Type 2 diabetes including HbA1c and fasting capillary glucose?",
+      "expected_pages": [
+        2
+      ],
+      "expected_keywords": [
+        "7.0",
+        "80-130"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.732,
+        0.3014,
+        0.2926
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page2_chunk1",
+          "page_number": 2,
+          "similarity_score": 0.732,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: TYPE 2 DIABETES MELLITUS Document ID: MED-REF-2026-02 | Endocrinology Division 1. Glycemic ..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page1_chunk2",
+          "page_number": 1,
+          "similarity_score": 0.3014,
+          "text_snippet": "Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg. 2. Initial Non-Pharmacological Interventions - Dietary Approach..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page2_chunk2",
+          "page_number": 2,
+          "similarity_score": 0.2926,
+          "text_snippet": "history. 2. Pharmacotherapy Pathway - First-line therapy: Metformin (initial 500 mg twice daily with meals, titrating up..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    },
+    {
+      "test_id": "test_04",
+      "category": "diabetes",
+      "is_supported": true,
+      "question": "What is the recommended first-line pharmacotherapy and titration dosage for Type 2 diabetes?",
+      "expected_pages": [
+        2
+      ],
+      "expected_keywords": [
+        "metformin",
+        "500",
+        "2000"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.559,
+        0.5145,
+        0.4767
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page2_chunk1",
+          "page_number": 2,
+          "similarity_score": 0.559,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: TYPE 2 DIABETES MELLITUS Document ID: MED-REF-2026-02 | Endocrinology Division 1. Glycemic ..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page2_chunk2",
+          "page_number": 2,
+          "similarity_score": 0.5145,
+          "text_snippet": "history. 2. Pharmacotherapy Pathway - First-line therapy: Metformin (initial 500 mg twice daily with meals, titrating up..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk3",
+          "page_number": 1,
+          "similarity_score": 0.4767,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    },
+    {
+      "test_id": "test_05",
+      "category": "emergency",
+      "is_supported": true,
+      "question": "What are the qSOFA criteria and clinical cutoffs for identifying sepsis?",
+      "expected_pages": [
+        3
+      ],
+      "expected_keywords": [
+        "22",
+        "100"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.5477,
+        0.3399,
+        0.2669
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk2",
+          "page_number": 3,
+          "similarity_score": 0.5477,
+          "text_snippet": "Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho 2. Sepsis & Septic Shock (qSOFA..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk1",
+          "page_number": 3,
+          "similarity_score": 0.3399,
+          "text_snippet": "CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS Document ID: MED-REF-2026-03 | Emergency & Critical Care 1. ..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk1",
+          "page_number": 1,
+          "similarity_score": 0.2669,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: HYPERTENSION MANAGEMENT Document ID: MED-REF-2026-01 | Department of Internal Medicine 1. D..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    },
+    {
+      "test_id": "test_06",
+      "category": "emergency",
+      "is_supported": true,
+      "question": "What is the primary emergency medication, dosage, and administration route for anaphylaxis?",
+      "expected_pages": [
+        3
+      ],
+      "expected_keywords": [
+        "epinephrine",
+        "0.3",
+        "intramuscular"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.5095,
+        0.4871,
+        0.4681
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk3",
+          "page_number": 3,
+          "similarity_score": 0.5095,
+          "text_snippet": "(urticaria, angioedema) plus respiratory compromise or hypotension. - Primary treatment: Epinephrine (1:1,000 / 1 mg/mL)..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk2",
+          "page_number": 3,
+          "similarity_score": 0.4871,
+          "text_snippet": "Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho 2. Sepsis & Septic Shock (qSOFA..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk3",
+          "page_number": 1,
+          "similarity_score": 0.4681,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    },
+    {
+      "test_id": "test_07",
+      "category": "emergency",
+      "is_supported": true,
+      "question": "What are the contraindications for administering Nitroglycerin in acute coronary syndrome?",
+      "expected_pages": [
+        3
+      ],
+      "expected_keywords": [
+        "90",
+        "pde-5"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.7022,
+        0.5936,
+        0.4097
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk1",
+          "page_number": 3,
+          "similarity_score": 0.7022,
+          "text_snippet": "CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS Document ID: MED-REF-2026-03 | Emergency & Critical Care 1. ..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk2",
+          "page_number": 3,
+          "similarity_score": 0.5936,
+          "text_snippet": "Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho 2. Sepsis & Septic Shock (qSOFA..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page2_chunk2",
+          "page_number": 2,
+          "similarity_score": 0.4097,
+          "text_snippet": "history. 2. Pharmacotherapy Pathway - First-line therapy: Metformin (initial 500 mg twice daily with meals, titrating up..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    },
+    {
+      "test_id": "test_08",
+      "category": "multi_chunk",
+      "is_supported": true,
+      "question": "What non-pharmacological lifestyle interventions and sodium limits are recommended for managing hypertension?",
+      "expected_pages": [
+        1
+      ],
+      "expected_keywords": [
+        "dash",
+        "1,500",
+        "sodium"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.7152,
+        0.5474,
+        0.476
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page1_chunk2",
+          "page_number": 1,
+          "similarity_score": 0.7152,
+          "text_snippet": "Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg. 2. Initial Non-Pharmacological Interventions - Dietary Approach..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page1_chunk3",
+          "page_number": 1,
+          "similarity_score": 0.5474,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk1",
+          "page_number": 1,
+          "similarity_score": 0.476,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: HYPERTENSION MANAGEMENT Document ID: MED-REF-2026-01 | Department of Internal Medicine 1. D..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    },
+    {
+      "test_id": "test_09",
+      "category": "unsupported",
+      "is_supported": false,
+      "question": "What is the recommended surgical or antibiotic treatment protocol for acute appendicitis?",
+      "expected_pages": [],
+      "expected_keywords": [
+        "insufficient",
+        "not contain",
+        "does not contain",
+        "not mentioned"
+      ],
+      "retrieval_result": "PASS (OOD)",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.374,
+        0.2951,
+        0.2914
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk3",
+          "page_number": 3,
+          "similarity_score": 0.374,
+          "text_snippet": "(urticaria, angioedema) plus respiratory compromise or hypotension. - Primary treatment: Epinephrine (1:1,000 / 1 mg/mL)..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk2",
+          "page_number": 3,
+          "similarity_score": 0.2951,
+          "text_snippet": "Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho 2. Sepsis & Septic Shock (qSOFA..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page3_chunk1",
+          "page_number": 3,
+          "similarity_score": 0.2914,
+          "text_snippet": "CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS Document ID: MED-REF-2026-03 | Emergency & Critical Care 1. ..."
+        }
+      ],
+      "retrieval_reason": "Out-of-domain query (no ground-truth chunks exist in corpus)",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    },
+    {
+      "test_id": "test_10",
+      "category": "unsupported",
+      "is_supported": false,
+      "question": "What are the surgical steps and prosthetic mesh placement techniques for repairing an inguinal hernia?",
+      "expected_pages": [],
+      "expected_keywords": [
+        "insufficient",
+        "not contain",
+        "does not contain",
+        "not mentioned"
+      ],
+      "retrieval_result": "PASS (OOD)",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "FAIL",
+      "source_result": "FAIL",
+      "overall_result": "FAIL",
+      "similarity_scores": [
+        0.2143,
+        0.0896,
+        0.0792
+      ],
+      "llm_answer": "[ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk3",
+          "page_number": 3,
+          "similarity_score": 0.2143,
+          "text_snippet": "(urticaria, angioedema) plus respiratory compromise or hypotension. - Primary treatment: Epinephrine (1:1,000 / 1 mg/mL)..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk1",
+          "page_number": 3,
+          "similarity_score": 0.0896,
+          "text_snippet": "CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS Document ID: MED-REF-2026-03 | Emergency & Critical Care 1. ..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page2_chunk3",
+          "page_number": 2,
+          "similarity_score": 0.0792,
+          "text_snippet": "0.5-1.0 mg weekly, Liraglutide 1.2-1.8 mg daily). 3. Monitoring and Complication Screenings - Annual comprehensive foot ..."
+        }
+      ],
+      "retrieval_reason": "Out-of-domain query (no ground-truth chunks exist in corpus)",
+      "answer_reason": "LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)"
+    }
+  ]
+}

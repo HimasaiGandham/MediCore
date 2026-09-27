@@ -1,0 +1,102 @@
+============================================================
+MEDICORE — PHASE 6 RAG EVALUATION
+============================================================
+
+Total Test Cases : 10
+
+## RETRIEVAL EVALUATION
+Supported Test Cases     : 8
+Top-1 Retrieval Accuracy : 100.0% (8/8)
+Top-3 Retrieval Accuracy : 100.0% (8/8)
+
+## ANSWER EVALUATION
+Supported Questions Tested : 8
+Grounded Answers            : 0/8
+Source Traceability         : 0/8
+Unsupported Questions       : 2
+Unsupported Handling Passed : 0/2
+
+============================================================
+DETAILED RESULTS
+============================================================
+Test ID    Category       Retrieval    Answer     Source     Overall
+-----------------------------------------------------------------
+test_01    factual        PASS         FAIL       FAIL       FAIL
+test_02    factual        PASS         FAIL       FAIL       FAIL
+test_03    diabetes       PASS         FAIL       FAIL       FAIL
+test_04    diabetes       PASS         FAIL       FAIL       FAIL
+test_05    emergency      PASS         FAIL       FAIL       FAIL
+test_06    emergency      PASS         FAIL       FAIL       FAIL
+test_07    emergency      PASS         FAIL       FAIL       FAIL
+test_08    multi_chunk    PASS         FAIL       FAIL       FAIL
+test_09    unsupported    PASS         FAIL       FAIL       FAIL
+test_10    unsupported    PASS         FAIL       FAIL       FAIL
+
+============================================================
+FAILED TESTS
+============================================================
+Test ID   : test_01
+Question  : What are the criteria for Stage 2 hypertension?
+Expected  : Pages [1], Keywords ['140', '90']
+Retrieved : ['page1_chunk1', 'page1_chunk2', 'page1_chunk3']
+Reason    : Retrieval: OK | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+Test ID   : test_02
+Question  : Why should ACE inhibitors and ARBs not be combined simultaneously in hypertension treatment?
+Expected  : Pages [1], Keywords ['renal', 'risk']
+Retrieved : ['page1_chunk3', 'page1_chunk2', 'page1_chunk1']
+Reason    : Retrieval: OK | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+Test ID   : test_03
+Question  : What are the glycemic targets for Type 2 diabetes including HbA1c and fasting capillary glucose?
+Expected  : Pages [2], Keywords ['7.0', '80-130']
+Retrieved : ['page2_chunk1', 'page1_chunk2', 'page2_chunk2']
+Reason    : Retrieval: OK | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+Test ID   : test_04
+Question  : What is the recommended first-line pharmacotherapy and titration dosage for Type 2 diabetes?
+Expected  : Pages [2], Keywords ['metformin', '500', '2000']
+Retrieved : ['page2_chunk1', 'page2_chunk2', 'page1_chunk3']
+Reason    : Retrieval: OK | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+Test ID   : test_05
+Question  : What are the qSOFA criteria and clinical cutoffs for identifying sepsis?
+Expected  : Pages [3], Keywords ['22', '100']
+Retrieved : ['page3_chunk2', 'page3_chunk1', 'page1_chunk1']
+Reason    : Retrieval: OK | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+Test ID   : test_06
+Question  : What is the primary emergency medication, dosage, and administration route for anaphylaxis?
+Expected  : Pages [3], Keywords ['epinephrine', '0.3', 'intramuscular']
+Retrieved : ['page3_chunk3', 'page3_chunk2', 'page1_chunk3']
+Reason    : Retrieval: OK | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+Test ID   : test_07
+Question  : What are the contraindications for administering Nitroglycerin in acute coronary syndrome?
+Expected  : Pages [3], Keywords ['90', 'pde-5']
+Retrieved : ['page3_chunk1', 'page3_chunk2', 'page2_chunk2']
+Reason    : Retrieval: OK | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+Test ID   : test_08
+Question  : What non-pharmacological lifestyle interventions and sodium limits are recommended for managing hypertension?
+Expected  : Pages [1], Keywords ['dash', '1,500', 'sodium']
+Retrieved : ['page1_chunk2', 'page1_chunk3', 'page1_chunk1']
+Reason    : Retrieval: OK | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+Test ID   : test_09
+Question  : What is the recommended surgical or antibiotic treatment protocol for acute appendicitis?
+Expected  : Pages [], Keywords ['insufficient', 'not contain', 'does not contain', 'not mentioned']
+Retrieved : ['page3_chunk3', 'page3_chunk2', 'page3_chunk1']
+Reason    : Retrieval: Out-of-domain query (no ground-truth chunks exist in corpus) | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+Test ID   : test_10
+Question  : What are the surgical steps and prosthetic mesh placement techniques for repairing an inguinal hernia?
+Expected  : Pages [], Keywords ['insufficient', 'not contain', 'does not contain', 'not mentioned']
+Retrieved : ['page3_chunk3', 'page3_chunk1', 'page2_chunk3']
+Reason    : Retrieval: Out-of-domain query (no ground-truth chunks exist in corpus) | Answer: LLM Generation returned error: [ERROR] Gemini API request failed: ClientError - Daily quota reached (20 requests/day free tier)
+----------------------------------------
+
+============================================================
+NOTE: This evaluation measures RAG retrieval and grounding behavior
+against a local benchmark. It does NOT claim clinical accuracy.
+============================================================
