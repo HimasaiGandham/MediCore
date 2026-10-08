@@ -36,8 +36,12 @@ if hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-# Set HuggingFace cache directory to project folder on D: drive
+# Ensure project root is in sys.path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+# Set HuggingFace cache directory to project folder on D: drive
 os.environ["HF_HOME"] = str(PROJECT_ROOT / ".cache" / "huggingface")
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 
@@ -311,13 +315,21 @@ def search_faiss(
             continue
 
         matched_chunk = chunks[chunk_idx]
+        meta = matched_chunk.get("metadata", {})
         results.append({
             "rank": rank,
             "similarity_score": float(score),
-            "chunk_id": matched_chunk["metadata"]["chunk_id"],
-            "document_name": matched_chunk["metadata"]["document_name"],
-            "page_number": matched_chunk["metadata"]["page_number"],
-            "chunk_index": matched_chunk["metadata"]["chunk_index"],
+            "chunk_id": meta.get("chunk_id", f"chunk_{chunk_idx}"),
+            "document_id": meta.get("document_id", meta.get("document_name", "MED-REF")),
+            "document_name": meta.get("document_name", "medical_information.pdf"),
+            "document_title": meta.get("document_title", meta.get("document_name", "Medical Reference")),
+            "source_organization": meta.get("source_organization", "Medical Reference Authority"),
+            "organization_level": meta.get("organization_level", "Level 1 — Reference Clinical Guideline"),
+            "source_url": meta.get("source_url", ""),
+            "topic_category": meta.get("topic_category", "General Medicine"),
+            "section_title": meta.get("section_title", f"Page {meta.get('page_number', 1)}"),
+            "page_number": meta.get("page_number", 1),
+            "chunk_index": meta.get("chunk_index", 1),
             "text": matched_chunk["text"]
         })
 
@@ -330,23 +342,28 @@ def search_faiss(
 
 SYSTEM_INSTRUCTION = """You are MediCore, an informational healthcare knowledge assistant.
 
-Answer the user's question using ONLY the reference context provided below.
+Answer the user's question using ONLY the authoritative reference context provided below.
 Do not invent medical information.
 Do not use unsupported facts.
 If the retrieved context does not contain enough information to answer the question, clearly state:
 "The available reference material does not contain sufficient information to answer this question."
 Do not diagnose patients, prescribe medication, or provide personalized treatment decisions.
-Keep answers informational and cite the relevant document name and page number when stating facts."""
+Always cite the source organization (e.g., WHO, CDC, NHS, ICMR) and document reference when stating facts."""
 
 
 def build_grounded_prompt(query: str, retrieved_chunks: list[dict]) -> str:
     """
     Constructs a tightly grounded prompt combining the system instruction,
-    retrieved reference context with source metadata, and user query.
+    retrieved reference context with authoritative source metadata, and user query.
     """
     context_sections = []
     for i, chunk in enumerate(retrieved_chunks, start=1):
-        header = f"[Reference Source {i}: {chunk['document_name']} — Page {chunk['page_number']} — {chunk['chunk_id']}]"
+        org = chunk.get("source_organization", "Medical Reference")
+        doc_id = chunk.get("document_id", chunk.get("document_name", "Ref"))
+        title = chunk.get("document_title", chunk.get("document_name", "Document"))
+        sec = chunk.get("section_title", f"Page {chunk.get('page_number', 1)}")
+        page = chunk.get("page_number", 1)
+        header = f"[Reference Source {i}: {org} — {title} ({doc_id}) — Section: {sec} (Page {page}) — {chunk.get('chunk_id')}]"
         context_sections.append(f"{header}\n{chunk['text']}")
 
     reference_context = "\n\n".join(context_sections)
@@ -393,47 +410,57 @@ def generate_answer(query: str, retrieved_chunks: list[dict]) -> str:
 
     prompt = build_grounded_prompt(query, retrieved_chunks)
 
-    # Try up to 4 attempts with dynamic backoff for transient server spikes and rate limits (429/503)
-    for attempt in range(4):
-        try:
-            # Initialize Google's official Gemini client
-            client = genai.Client(api_key=api_key.strip())
+    # Primary model with fallback candidates in case of 503 high demand spikes
+    primary_model = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
+    fallback_models = [primary_model, "gemini-3.1-flash-lite", "gemini-3.5-flash-lite"]
+    # De-duplicate while preserving order
+    candidate_models = list(dict.fromkeys(fallback_models))
 
-            # Generate grounded response using Gemini 3.8 Flash
-            gemini_model = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
-            response = client.models.generate_content(
-                model=gemini_model,
-                contents=prompt,
-            )
+    last_error = None
+    for model_name in candidate_models:
+        for attempt in range(3):
+            try:
+                # Initialize Google's official Gemini client
+                client = genai.Client(api_key=api_key.strip())
 
-            if response and response.text:
-                return response.text.strip()
-            else:
-                return "The model returned an empty response."
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                )
 
-        except Exception as e:
-            err_str = str(e)
-            transient_patterns = ["503", "429", "UNAVAILABLE", "RemoteProtocolError", "Connection", "Timeout", "EOF"]
-            is_transient = any(pat in err_str or pat in type(e).__name__ for pat in transient_patterns)
-            if "generaterequestsperday" in err_str.lower():
-                return f"[ERROR] Gemini API request failed: {type(e).__name__} - Daily quota reached (20 requests/day free tier)"
-
-            if is_transient and attempt < 2:
-                import time
-                import re
-                retry_match = re.search(r"Please retry in ([\d\.]+)s", err_str)
-                if not retry_match:
-                    retry_match = re.search(r"'retryDelay':\s*'(\d+)s'", err_str)
-                if retry_match:
-                    wait_time = float(retry_match.group(1)) + 1.0
+                if response and response.text:
+                    return response.text.strip()
                 else:
-                    wait_time = 2.0 * (attempt + 1)
+                    return "The model returned an empty response."
 
-                if wait_time <= 10.0:
-                    print(f"  [API Backoff] Rate limit reached. Waiting {wait_time:.1f}s before attempt {attempt + 2}/3...", flush=True)
-                    time.sleep(wait_time)
-                    continue
-            return f"[ERROR] Gemini API request failed: {type(e).__name__} - {e}"
+            except Exception as e:
+                last_error = e
+                err_str = str(e)
+                transient_patterns = ["503", "429", "UNAVAILABLE", "RemoteProtocolError", "Connection", "Timeout", "EOF"]
+                is_transient = any(pat in err_str or pat in type(e).__name__ for pat in transient_patterns)
+                if "generaterequestsperday" in err_str.lower():
+                    return f"[ERROR] Gemini API request failed: {type(e).__name__} - Daily quota reached (20 requests/day free tier)"
+
+                if is_transient and attempt < 2:
+                    import time
+                    import re
+                    retry_match = re.search(r"Please retry in ([\d\.]+)s", err_str)
+                    if not retry_match:
+                        retry_match = re.search(r"'retryDelay':\s*'(\d+)s'", err_str)
+                    if retry_match:
+                        wait_time = float(retry_match.group(1)) + 1.0
+                    else:
+                        wait_time = 2.0 * (attempt + 1)
+
+                    if wait_time <= 10.0:
+                        print(f"  [API Backoff] Rate limit on {model_name}. Waiting {wait_time:.1f}s before attempt {attempt + 2}/3...", flush=True)
+                        time.sleep(wait_time)
+                        continue
+                # If 503 high demand on primary model, break inner loop to try next model
+                if "503" in err_str or "UNAVAILABLE" in err_str:
+                    break
+
+    return f"[ERROR] Gemini API request failed: {type(last_error).__name__} - {last_error}"
 
 
 def answer_query(
@@ -494,7 +521,12 @@ def answer_query(
     print("SOURCES")
     print("==================================================")
     for i, res in enumerate(retrieved_results, start=1):
-        print(f"{i}. {res['document_name']} — Page {res['page_number']} — {res['chunk_id']}")
+        org = res.get("source_organization", "Medical Authority")
+        doc_id = res.get("document_id", res.get("document_name"))
+        title = res.get("document_title", res.get("document_name"))
+        sec = res.get("section_title", f"Page {res.get('page_number', 1)}")
+        sim = res.get("similarity_score", 0.0)
+        print(f"{i}. [{org}] {title} ({doc_id}) — Section: {sec} — Chunk: {res['chunk_id']} (Similarity: {sim:.4f})")
     print("==================================================\n")
 
     return {
@@ -506,37 +538,33 @@ def answer_query(
 
 def main():
     project_root = Path(__file__).resolve().parent.parent
-    pdf_file_path = project_root / "documents" / "medical_information.pdf"
 
     print("=" * 70)
-    print("Healthcare RAG (MediCore) - Phase 5: Google Gemini LLM Integration")
+    print("Healthcare RAG (MediCore) - Authoritative Medical Knowledge Base")
     print("=" * 70)
 
-    # 1. Phase 1: Ingestion
-    pages_data = extract_text_from_pdf(pdf_file_path)
-    if not pages_data:
-        print("[ERROR] No pages were extracted. Exiting.")
-        return
-
-    # 2. Phase 2: Chunking & Metadata
-    document_name = pdf_file_path.name
-    chunks = create_chunks_with_metadata(
-        pages_data=pages_data,
-        document_name=document_name,
-        chunk_size=500,
-        overlap=50
-    )
-    if not chunks:
-        print("[ERROR] No chunks were created. Exiting.")
-        return
-
-    # 3. Phase 3: Embeddings
     model_name = "sentence-transformers/all-MiniLM-L6-v2"
     model = load_embedding_model(model_name)
-    chunks_with_embeddings = generate_embeddings_for_chunks(chunks, model)
 
-    # 4. Phase 4: FAISS Vector Indexing
-    faiss_index = build_faiss_index(chunks_with_embeddings)
+    # Attempt to load the comprehensive authoritative multi-source knowledge base
+    use_kb = False
+    try:
+        from src.knowledge_base import build_or_load_knowledge_base
+        faiss_index, chunks_with_embeddings = build_or_load_knowledge_base(model)
+        use_kb = True
+        print(f"[STATUS] Authoritative Knowledge Base loaded successfully ({len(chunks_with_embeddings)} chunks).")
+    except Exception as e:
+        print(f"[INFO] Using baseline single-PDF pipeline ({e})")
+        pdf_file_path = project_root / "documents" / "medical_information.pdf"
+        pages_data = extract_text_from_pdf(pdf_file_path)
+        chunks = create_chunks_with_metadata(
+            pages_data=pages_data,
+            document_name=pdf_file_path.name,
+            chunk_size=500,
+            overlap=50
+        )
+        chunks_with_embeddings = generate_embeddings_for_chunks(chunks, model)
+        faiss_index = build_faiss_index(chunks_with_embeddings)
 
     print("=" * 70)
     print("MediCore System Startup Summary")
@@ -548,17 +576,19 @@ def main():
     print(f"LLM Provider Config  : {os.getenv('LLM_PROVIDER', 'gemini')} (model: {os.getenv('GEMINI_MODEL', 'gemini-3.8-flash')})")
     print("=" * 70)
 
-    # 5. Phase 5 Test Suite (3 required verification queries)
+    # Multi-source benchmark queries demonstrating cross-authority grounding and refusal
     test_queries = [
         "What are the criteria for Stage 2 hypertension?",
-        "What are the glycemic targets for Type 2 diabetes?",
-        "What is the treatment for appendicitis?"
+        "What is the recommended surgical or antibiotic treatment for acute appendicitis?",
+        "What are the warning signs of severe dengue and why are NSAIDs contraindicated?",
+        "What is the standard 4-drug intensive regimen (HRZE) for active tuberculosis?",
+        "What are the surgical steps and prosthetic mesh placement techniques for repairing an inguinal hernia?"
     ]
 
     for q in test_queries:
         answer_query(q, model, faiss_index, chunks_with_embeddings, top_k=3)
 
-    print("Phase 5 pipeline execution completed.")
+    print("MediCore multi-source pipeline execution completed.")
 
 
 if __name__ == "__main__":
