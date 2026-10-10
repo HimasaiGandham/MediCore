@@ -32,8 +32,8 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 import faiss
 from sentence_transformers import SentenceTransformer
 
-# Reuse chunk_text and extract_text_from_pdf from src/main.py
 from src.main import chunk_text, extract_text_from_pdf
+from src.logger import log_system_event
 
 
 INDEX_DIR = PROJECT_ROOT / "documents" / ".index"
@@ -205,9 +205,11 @@ def build_or_load_knowledge_base(
             with open(chunks_file, "rb") as f:
                 chunks = pickle.load(f)
             print(f"Loaded {len(chunks)} chunks and FAISS index with {index.ntotal} vectors.\n")
+            log_system_event("index_load", "success", {"cached": True, "num_chunks": len(chunks), "num_vectors": index.ntotal})
             return index, chunks
         except Exception as e:
             print(f"[WARNING] Cache load failed ({e}), rebuilding index...")
+            log_system_event("index_load_error", "failure", {"safe_error": type(e).__name__}, level="warning")
 
     # Build fresh index
     print("Building fresh knowledge base vector index...")
@@ -237,8 +239,10 @@ def build_or_load_knowledge_base(
         with open(chunks_file, "wb") as f:
             pickle.dump(chunks, f, protocol=pickle.HIGHEST_PROTOCOL)
         print(f"Cached FAISS index and {len(chunks)} chunks to {INDEX_DIR}.\n")
+        log_system_event("index_rebuild", "success", {"num_chunks": len(chunks), "num_vectors": index.ntotal})
     except Exception as e:
         print(f"[WARNING] Failed to persist index cache: {e}")
+        log_system_event("index_rebuild_persist_error", "failure", {"safe_error": type(e).__name__}, level="warning")
 
     return index, chunks
 
