@@ -1,0 +1,574 @@
+{
+  "summary": {
+    "evaluation_mode": "authoritative",
+    "total_test_cases": 13,
+    "supported_test_cases": 11,
+    "unsupported_test_cases": 2,
+    "top1_retrieval_accuracy_pct": 100.0,
+    "top3_retrieval_accuracy_pct": 100.0,
+    "clinical_keyword_recall_pct": 100.0,
+    "source_provenance_integrity_pct": 100.0,
+    "unsupported_ood_handled": 2
+  },
+  "test_results": [
+    {
+      "test_id": "test_01",
+      "category": "cardiovascular",
+      "is_supported": true,
+      "question": "What are the criteria for Stage 2 hypertension?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.6952,
+      "mean_top3_similarity": 0.6356,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page1_chunk1",
+          "document_id": "MED-REF-2026-01",
+          "source_organization": "Department of Internal Medicine / Emergency Reference",
+          "page_number": 1,
+          "similarity_score": 0.6952,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: HYPERTENSION MANAGEMENT Document ID: MED-REF-2026-01 | Department of Internal Medicine 1. D..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "WHO-GUIDE-HTN-2021_s1_c2",
+          "document_id": "WHO-GUIDE-HTN-2021",
+          "source_organization": "World Health Organization (WHO)",
+          "page_number": 1,
+          "similarity_score": 0.6275,
+          "text_snippet": "Diastolic 80-89 mmHg; Stage 2 Hypertension: Systolic >= 140 mmHg or Diastolic >= 90 mmHg; Hypertensive Crisis: Systolic ..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "WHO-GUIDE-HTN-2021_s1_c1",
+          "document_id": "WHO-GUIDE-HTN-2021",
+          "source_organization": "World Health Organization (WHO)",
+          "page_number": 1,
+          "similarity_score": 0.5842,
+          "text_snippet": "Hypertension is diagnosed when on two different days, the systolic blood pressure readings on both days are >= 140 mmHg ..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_02",
+      "category": "cardiovascular",
+      "is_supported": true,
+      "question": "Why should ACE inhibitors and ARBs not be combined simultaneously in hypertension treatment?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.7223,
+      "mean_top3_similarity": 0.6474,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "WHO-GUIDE-HTN-2021_s3_c1",
+          "document_id": "WHO-GUIDE-HTN-2021",
+          "source_organization": "World Health Organization (WHO)",
+          "page_number": 2,
+          "similarity_score": 0.7223,
+          "text_snippet": "ACE inhibitors and ARBs must NOT be combined simultaneously in the treatment of hypertension. Dual renin-angiotensin-ald..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page1_chunk3",
+          "document_id": "MED-REF-2026-01",
+          "source_organization": "Department of Internal Medicine / Emergency Reference",
+          "page_number": 1,
+          "similarity_score": 0.6619,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "WHO-GUIDE-HTN-2021_s2_c1",
+          "document_id": "WHO-GUIDE-HTN-2021",
+          "source_organization": "World Health Organization (WHO)",
+          "page_number": 2,
+          "similarity_score": 0.5581,
+          "text_snippet": "The World Health Organization recommends initiation of treatment with any of the three classes of first-line antihyperte..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_03",
+      "category": "endocrinology",
+      "is_supported": true,
+      "question": "What are the glycemic targets for Type 2 diabetes including HbA1c and fasting capillary glucose?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.732,
+      "mean_top3_similarity": 0.6837,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page2_chunk1",
+          "document_id": "MED-REF-2026-02",
+          "source_organization": "Department of Internal Medicine / Emergency Reference",
+          "page_number": 2,
+          "similarity_score": 0.732,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: TYPE 2 DIABETES MELLITUS Document ID: MED-REF-2026-02 | Endocrinology Division 1. Glycemic ..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "CDC-CLIN-DIAB-2024_s2_c1",
+          "document_id": "CDC-CLIN-DIAB-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 1,
+          "similarity_score": 0.6977,
+          "text_snippet": "The recommended glycemic targets for non-pregnant adults with diabetes include: 1. Target HbA1c: < 7.0% (53 mmol/mol) fo..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "CDC-CLIN-DIAB-2024_s1_c2",
+          "document_id": "CDC-CLIN-DIAB-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 1,
+          "similarity_score": 0.6215,
+          "text_snippet": "criteria confirmed on repeat testing: 1. Fasting plasma glucose (FPG) >= 126 mg/dL (7.0 mmol/L) after an 8-hour fast; 2...."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_04",
+      "category": "endocrinology",
+      "is_supported": true,
+      "question": "What is the recommended first-line pharmacotherapy and titration dosage for Type 2 diabetes?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.6744,
+      "mean_top3_similarity": 0.5877,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "CDC-CLIN-DIAB-2024_s3_c1",
+          "document_id": "CDC-CLIN-DIAB-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 2,
+          "similarity_score": 0.6744,
+          "text_snippet": "First-line pharmacological therapy for Type 2 diabetes is Metformin (biguanide class) combined with lifestyle modificati..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page2_chunk1",
+          "document_id": "MED-REF-2026-02",
+          "source_organization": "Department of Internal Medicine / Emergency Reference",
+          "page_number": 2,
+          "similarity_score": 0.559,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: TYPE 2 DIABETES MELLITUS Document ID: MED-REF-2026-02 | Endocrinology Division 1. Glycemic ..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "CDC-CLIN-DIAB-2024_s4_c1",
+          "document_id": "CDC-CLIN-DIAB-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 2,
+          "similarity_score": 0.5298,
+          "text_snippet": "In patients with Type 2 diabetes and established atherosclerotic cardiovascular disease (ASCVD), heart failure (HF), or ..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_05",
+      "category": "emergency",
+      "is_supported": true,
+      "question": "What are the qSOFA criteria and clinical cutoffs for identifying sepsis?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.8154,
+      "mean_top3_similarity": 0.6753,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "WHO-CRIT-SEPS-2023_s1_c1",
+          "document_id": "WHO-CRIT-SEPS-2023",
+          "source_organization": "World Health Organization (WHO)",
+          "page_number": 1,
+          "similarity_score": 0.8154,
+          "text_snippet": "Sepsis is defined as life-threatening organ dysfunction caused by a dysregulated host immune response to infection. If n..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "WHO-CRIT-SEPS-2023_s1_c2",
+          "document_id": "WHO-CRIT-SEPS-2023",
+          "source_organization": "World Health Organization (WHO)",
+          "page_number": 1,
+          "similarity_score": 0.6628,
+          "text_snippet": "who are at substantial risk of in-hospital mortality. The three qSOFA clinical criteria and cutoffs are: 1. Respiratory ..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page3_chunk2",
+          "document_id": "MED-REF-2026-03",
+          "source_organization": "Department of Internal Medicine / Emergency Reference",
+          "page_number": 3,
+          "similarity_score": 0.5477,
+          "text_snippet": "Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho 2. Sepsis & Septic Shock (qSOFA..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_06",
+      "category": "emergency",
+      "is_supported": true,
+      "question": "What is the primary emergency medication, dosage, and administration route for anaphylaxis?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.6894,
+      "mean_top3_similarity": 0.5933,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "WHO-CRIT-SEPS-2023_s4_c1",
+          "document_id": "WHO-CRIT-SEPS-2023",
+          "source_organization": "World Health Organization (WHO)",
+          "page_number": 2,
+          "similarity_score": 0.6894,
+          "text_snippet": "Epinephrine (Adrenaline) is the definitive first-line emergency medication for anaphylaxis and must be administered imme..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "WHO-CRIT-SEPS-2023_s3_c1",
+          "document_id": "WHO-CRIT-SEPS-2023",
+          "source_organization": "World Health Organization (WHO)",
+          "page_number": 2,
+          "similarity_score": 0.5734,
+          "text_snippet": "Anaphylaxis is an acute, severe, life-threatening systemic hypersensitivity reaction. It is characterized by rapid onset..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "CDC-RESP-ASTH-2024_s3_c1",
+          "document_id": "CDC-RESP-ASTH-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 2,
+          "similarity_score": 0.517,
+          "text_snippet": "An acute asthma attack represents a severe clinical deterioration requiring urgent stepped intervention. Management incl..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_07",
+      "category": "cardiology_emergency",
+      "is_supported": true,
+      "question": "What are the contraindications for administering Nitroglycerin in acute coronary syndrome?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.7414,
+      "mean_top3_similarity": 0.7075,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "NHS-EMERG-ACS-2024_s3_c1",
+          "document_id": "NHS-EMERG-ACS-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 2,
+          "similarity_score": 0.7414,
+          "text_snippet": "Nitroglycerin (GTN) administration is strictly contraindicated in the following acute clinical situations: 1. Hypotensio..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk1",
+          "document_id": "MED-REF-2026-03",
+          "source_organization": "Department of Internal Medicine / Emergency Reference",
+          "page_number": 3,
+          "similarity_score": 0.7022,
+          "text_snippet": "CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS Document ID: MED-REF-2026-03 | Emergency & Critical Care 1. ..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "NHS-EMERG-ACS-2024_s2_c1",
+          "document_id": "NHS-EMERG-ACS-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 1,
+          "similarity_score": 0.679,
+          "text_snippet": "Upon recognition of acute coronary syndrome red flags, immediate emergency medical services (999/911/108) must be dispat..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_08",
+      "category": "digestive",
+      "is_supported": true,
+      "question": "What is the recommended surgical or antibiotic treatment protocol for acute appendicitis?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.8006,
+      "mean_top3_similarity": 0.6894,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "NHS-CLIN-APP-2024_s4_c1",
+          "document_id": "NHS-CLIN-APP-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 2,
+          "similarity_score": 0.8006,
+          "text_snippet": "In select patients with uncomplicated acute appendicitis without evidence of perforation, abscess, or appendicolith, con..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "NHS-CLIN-APP-2024_s3_c1",
+          "document_id": "NHS-CLIN-APP-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 2,
+          "similarity_score": 0.6607,
+          "text_snippet": "The definitive standard treatment for acute appendicitis is surgical removal of the appendix, termed an appendectomy. An..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "NHS-CLIN-APP-2024_s4_c2",
+          "document_id": "NHS-CLIN-APP-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 2,
+          "similarity_score": 0.6069,
+          "text_snippet": "adherence of adjacent omentum and bowel loops forming an inflammatory phlegmon termed an 'appendix mass', initial treatm..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_09",
+      "category": "infectious_diseases",
+      "is_supported": true,
+      "question": "What are the warning signs of severe dengue and why are NSAIDs like aspirin contraindicated?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.7409,
+      "mean_top3_similarity": 0.6854,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "ICMR-CLIN-DENG-2023_s3_c2",
+          "document_id": "ICMR-CLIN-DENG-2023",
+          "source_organization": "Indian Council of Medical Research (ICMR)",
+          "page_number": 2,
+          "similarity_score": 0.7409,
+          "text_snippet": "anti-inflammatory drugs (NSAIDs) such as Aspirin, Ibuprofen, Diclofenac, and Mefenamic acid are STRICTLY CONTRAINDICATED..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "ICMR-CLIN-DENG-2023_s2_c1",
+          "document_id": "ICMR-CLIN-DENG-2023",
+          "source_organization": "Indian Council of Medical Research (ICMR)",
+          "page_number": 1,
+          "similarity_score": 0.6657,
+          "text_snippet": "The critical phase corresponds to the timing of plasma leakage. Patients must be monitored closely for warning signs sig..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "ICMR-CLIN-DENG-2023_s1_c1",
+          "document_id": "ICMR-CLIN-DENG-2023",
+          "source_organization": "Indian Council of Medical Research (ICMR)",
+          "page_number": 1,
+          "similarity_score": 0.6495,
+          "text_snippet": "Dengue is a mosquito-borne viral infection caused by four distinct serotypes of the dengue virus (DENV 1-4) transmitted ..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_10",
+      "category": "infectious_diseases",
+      "is_supported": true,
+      "question": "What is the standard 4-drug intensive regimen (HRZE) for active tuberculosis disease?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.7355,
+      "mean_top3_similarity": 0.6666,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "CDC-INF-TB-2024_s3_c1",
+          "document_id": "CDC-INF-TB-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 2,
+          "similarity_score": 0.7355,
+          "text_snippet": "The standard first-line curative pharmacotherapy for drug-susceptible pulmonary tuberculosis consists of a 6-month regim..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "CDC-INF-TB-2024_s3_c2",
+          "document_id": "CDC-INF-TB-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 2,
+          "similarity_score": 0.6858,
+          "text_snippet": "daily based on weight) [HRZE regimen]; 2. Continuation Phase (4 months): Dual therapy with Isoniazid and Rifampin / Rifa..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "CDC-INF-TB-2024_s2_c1",
+          "document_id": "CDC-INF-TB-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 1,
+          "similarity_score": 0.5787,
+          "text_snippet": "The classic presentation of active pulmonary tuberculosis includes: 1. Persistent, productive cough lasting for 3 or mor..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_11",
+      "category": "neurology_emergency",
+      "is_supported": true,
+      "question": "What are the FAST recognition signs and time window for intravenous thrombolysis in acute ischemic stroke?",
+      "retrieval_status": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": true,
+      "provenance_valid": true,
+      "top_similarity": 0.6915,
+      "mean_top3_similarity": 0.6507,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "NHS-EMERG-STRK-2024_s3_c1",
+          "document_id": "NHS-EMERG-STRK-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 2,
+          "similarity_score": 0.6915,
+          "text_snippet": "For acute ischemic stroke, specific evidence-based therapeutic time windows govern acute reperfusion: 1. Intravenous Thr..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "NHS-EMERG-STRK-2024_s2_c1",
+          "document_id": "NHS-EMERG-STRK-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 1,
+          "similarity_score": 0.6714,
+          "text_snippet": "Immediate emergency department management requires urgent non-contrast head CT or brain MRI within 20-45 minutes of arri..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "NHS-EMERG-STRK-2024_s1_c1",
+          "document_id": "NHS-EMERG-STRK-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 1,
+          "similarity_score": 0.589,
+          "text_snippet": "A stroke is a medical emergency caused by the disruption of blood supply to part of the brain. Approximately 85% of stro..."
+        }
+      ],
+      "reason": "OK"
+    },
+    {
+      "test_id": "test_12",
+      "category": "unsupported",
+      "is_supported": false,
+      "question": "What are the surgical steps and prosthetic mesh placement techniques for repairing an inguinal hernia?",
+      "retrieval_status": "PASS (OOD)",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": false,
+      "provenance_valid": true,
+      "top_similarity": 0.4923,
+      "mean_top3_similarity": 0.4084,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "NHS-CLIN-APP-2024_s3_c1",
+          "document_id": "NHS-CLIN-APP-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 2,
+          "similarity_score": 0.4923,
+          "text_snippet": "The definitive standard treatment for acute appendicitis is surgical removal of the appendix, termed an appendectomy. An..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "NHS-CLIN-APP-2024_s3_c2",
+          "document_id": "NHS-CLIN-APP-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 2,
+          "similarity_score": 0.4091,
+          "text_snippet": "surgery involves a single larger transverse or oblique incision (e.g., McBurney or Rocky-Davis incision) in the lower ri..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "NHS-CLIN-APP-2024_s4_c2",
+          "document_id": "NHS-CLIN-APP-2024",
+          "source_organization": "National Health Service (NHS UK)",
+          "page_number": 2,
+          "similarity_score": 0.3239,
+          "text_snippet": "adherence of adjacent omentum and bowel loops forming an inflammatory phlegmon termed an 'appendix mass', initial treatm..."
+        }
+      ],
+      "reason": "Out-of-domain query (Top-1 similarity: 0.492 < 0.50 threshold: correctly recognized as low relevance)"
+    },
+    {
+      "test_id": "test_13",
+      "category": "unsupported",
+      "is_supported": false,
+      "question": "What are the surgical osteotomy techniques for cosmetic rhinoplasty nasal bone narrowing?",
+      "retrieval_status": "PASS (OOD)",
+      "top1_match": true,
+      "top3_match": true,
+      "keywords_found": false,
+      "provenance_valid": true,
+      "top_similarity": 0.2659,
+      "mean_top3_similarity": 0.2434,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk3",
+          "document_id": "MED-REF-2026-03",
+          "source_organization": "Department of Internal Medicine / Emergency Reference",
+          "page_number": 3,
+          "similarity_score": 0.2659,
+          "text_snippet": "(urticaria, angioedema) plus respiratory compromise or hypotension. - Primary treatment: Epinephrine (1:1,000 / 1 mg/mL)..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "CDC-RESP-ASTH-2024_s2_c2",
+          "document_id": "CDC-RESP-ASTH-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 1,
+          "similarity_score": 0.2324,
+          "text_snippet": "Beta-2 Agonist (LABA e.g., Formoterol, Salmeterol) in moderate-to-severe persistent asthma; 2. Reliever Medications (Acu..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "CDC-RESP-ASTH-2024_s3_c1",
+          "document_id": "CDC-RESP-ASTH-2024",
+          "source_organization": "Centers for Disease Control and Prevention (CDC)",
+          "page_number": 2,
+          "similarity_score": 0.2319,
+          "text_snippet": "An acute asthma attack represents a severe clinical deterioration requiring urgent stepped intervention. Management incl..."
+        }
+      ],
+      "reason": "Out-of-domain query (Top-1 similarity: 0.266 < 0.50 threshold: correctly recognized as low relevance)"
+    }
+  ]
+}

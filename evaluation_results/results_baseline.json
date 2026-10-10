@@ -1,0 +1,595 @@
+{
+  "benchmark_summary": {
+    "evaluation_mode": "baseline",
+    "evaluation_type": "all",
+    "engine_used": "local",
+    "total_test_cases": 10,
+    "supported_questions": 8,
+    "unsupported_questions": 2,
+    "top1_retrieval_accuracy_pct": 100.0,
+    "top3_retrieval_accuracy_pct": 100.0,
+    "grounded_answers_passed": 8,
+    "grounded_answers_evaluated": 8,
+    "grounded_answer_pass_rate_pct": 100.0,
+    "source_citations_passed": 8,
+    "unsupported_refusals_passed": 2,
+    "unsupported_refusal_rate_pct": 100.0,
+    "api_quota_exhausted_count": 0,
+    "api_errors_count": 0
+  },
+  "test_results": [
+    {
+      "test_id": "test_01",
+      "category": "factual",
+      "is_supported": true,
+      "question": "What are the criteria for Stage 2 hypertension?",
+      "expected_doc_ids": [],
+      "expected_pages": [
+        1
+      ],
+      "expected_keywords": [
+        "140",
+        "90"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.6952,
+        0.5223,
+        0.3851
+      ],
+      "llm_answer": "Based on verified clinical guidance from **Medical Reference Authority** (*medical_information.pdf*, `medical_information.pdf` — Page 1):\n\n- Stage 1 Hypertension: Systolic 130-139 mmHg or Diastolic 80-89 mmHg.\n- Stage 2 Hypertension: Systolic >= 140 mmHg or Diastolic >= 90 mmHg.\n- Normal Blood Pressure: Systolic < 120 mmHg and Diastolic < 80 mmHg.\n- Elevated Blood Pressure: Systolic 120-129 mmHg and Diastolic < 80 mmHg.\n- Hypertensive Crisis: Systolic > 180 mmHg and/or Diastolic > 120\n• Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg.\n- Sodium restriction: Target < 1,500 mg/day (or at least 1,000 mg/day reduction).\n- Physical activity: 90-150 minutes of aerobic and dynamic resistance exercise per week.\n• Diagnostic Criteria & Staging\n\n*(Answer synthesized via MediCore Local Grounding Engine — verified against Medical Reference Authority reference material.)*",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page1_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.6952,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: HYPERTENSION MANAGEMENT Document ID: MED-REF-2026-01 | Department of Internal Medicine 1. D..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page1_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.5223,
+          "text_snippet": "Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg. 2. Initial Non-Pharmacological Interventions - Dietary Approach..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk3",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.3851,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "OK (Clinical keywords present & grounded in reference text)"
+    },
+    {
+      "test_id": "test_02",
+      "category": "factual",
+      "is_supported": true,
+      "question": "Why should ACE inhibitors and ARBs not be combined simultaneously in hypertension treatment?",
+      "expected_doc_ids": [],
+      "expected_pages": [
+        1
+      ],
+      "expected_keywords": [
+        "renal",
+        "risk"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.6619,
+        0.4246,
+        0.3739
+      ],
+      "llm_answer": "Based on verified clinical guidance from **Medical Reference Authority** (*medical_information.pdf*, `medical_information.pdf` — Page 1):\n\n• Note: ACE inhibitors and ARBs should not be combined simultaneously due to renal risk.\n• Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg.\n- Physical activity: 90-150 minutes of aerobic and dynamic resistance exercise per week.\n- Normal Blood Pressure: Systolic < 120 mmHg and Diastolic < 80 mmHg.\n- Elevated Blood Pressure: Systolic 120-129 mmHg and Diastolic < 80 mmHg.\n- Stage 1 Hypertension: Systolic 130-139 mmHg or Diastolic 80-89 mmHg.\n- Stage 2 Hypertension: Systolic >= 140 mmHg or Diastolic >= 90 mmHg.\n- Hypertensive Crisis: Systolic > 180 mmHg and/or Diastolic > 120\n- Angiotensin-Converting Enzyme (ACE) Inhibitors (e.g., Lisinopril 10-40 mg daily).\n\n*(Answer synthesized via MediCore Local Grounding Engine — verified against Medical Reference Authority reference material.)*",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page1_chunk3",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.6619,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page1_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.4246,
+          "text_snippet": "Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg. 2. Initial Non-Pharmacological Interventions - Dietary Approach..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.3739,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: HYPERTENSION MANAGEMENT Document ID: MED-REF-2026-01 | Department of Internal Medicine 1. D..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "OK (Clinical keywords present & grounded in reference text)"
+    },
+    {
+      "test_id": "test_03",
+      "category": "diabetes",
+      "is_supported": true,
+      "question": "What are the glycemic targets for Type 2 diabetes including HbA1c and fasting capillary glucose?",
+      "expected_doc_ids": [],
+      "expected_pages": [
+        2
+      ],
+      "expected_keywords": [
+        "7.0",
+        "80-130"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.732,
+        0.3014,
+        0.2926
+      ],
+      "llm_answer": "Based on verified clinical guidance from **Medical Reference Authority** (*medical_information.pdf*, `medical_information.pdf` — Page 2):\n\n- More relaxed targets (HbA1c < 8.0%) are appropriate for patients with severe hypoglycemia history.\n- Fasting and preprandial capillary plasma glucose: 80-130 mg/dL (4.4-7.2 mmol/L).\n- Target HbA1c for non-pregnant adults: < 7.0% (53 mmol/mol).\n- First-line therapy: Metformin (initial 500 mg twice daily with meals, titrating up to 2000 mg/day)\n- Peak postprandial capillary plasma glucose: < 180 mg/dL (10.0 mmol/L).\n• Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg.\n- Physical activity: 90-150 minutes of aerobic and dynamic resistance exercise per week.\n- Sodium restriction: Target < 1,500 mg/day (or at least 1,000 mg/day reduction).\n- Dietary Approaches to Stop Hypertension (DASH diet): High in vegetables, fruits, and whole grains.\n\n*(Answer synthesized via MediCore Local Grounding Engine — verified against Medical Reference Authority reference material.)*",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page2_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 2,
+          "similarity_score": 0.732,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: TYPE 2 DIABETES MELLITUS Document ID: MED-REF-2026-02 | Endocrinology Division 1. Glycemic ..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page1_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.3014,
+          "text_snippet": "Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg. 2. Initial Non-Pharmacological Interventions - Dietary Approach..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page2_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 2,
+          "similarity_score": 0.2926,
+          "text_snippet": "history. 2. Pharmacotherapy Pathway - First-line therapy: Metformin (initial 500 mg twice daily with meals, titrating up..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "OK (Clinical keywords present & grounded in reference text)"
+    },
+    {
+      "test_id": "test_04",
+      "category": "diabetes",
+      "is_supported": true,
+      "question": "What is the recommended first-line pharmacotherapy and titration dosage for Type 2 diabetes?",
+      "expected_doc_ids": [],
+      "expected_pages": [
+        2
+      ],
+      "expected_keywords": [
+        "metformin",
+        "500",
+        "2000"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.559,
+        0.5145,
+        0.4767
+      ],
+      "llm_answer": "Based on verified clinical guidance from **Medical Reference Authority** (*medical_information.pdf*, `medical_information.pdf` — Page 2):\n\n- First-line therapy: Metformin (initial 500 mg twice daily with meals, titrating up to 2000 mg/day)\n• First-Line Pharmacotherapy\n- Target HbA1c for non-pregnant adults: < 7.0% (53 mmol/mol).\n- More relaxed targets (HbA1c < 8.0%) are appropriate for patients with severe hypoglycemia history.\n- Fasting and preprandial capillary plasma glucose: 80-130 mg/dL (4.4-7.2 mmol/L).\n- Peak postprandial capillary plasma glucose: < 180 mg/dL (10.0 mmol/L).\n• combined with lifestyle intervention.\n• * SGLT2 Inhibitors (e.g., Empagliflozin 10-25 mg daily, Dapagliflozin 10 mg daily).\n• * GLP-1 Receptor Agonists (e.g., Semaglutide 0.5-1.0 mg weekly, Liraglutide 1.2-1.8 mg daily).\n\n*(Answer synthesized via MediCore Local Grounding Engine — verified against Medical Reference Authority reference material.)*",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page2_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 2,
+          "similarity_score": 0.559,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: TYPE 2 DIABETES MELLITUS Document ID: MED-REF-2026-02 | Endocrinology Division 1. Glycemic ..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page2_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 2,
+          "similarity_score": 0.5145,
+          "text_snippet": "history. 2. Pharmacotherapy Pathway - First-line therapy: Metformin (initial 500 mg twice daily with meals, titrating up..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk3",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.4767,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "OK (Clinical keywords present & grounded in reference text)"
+    },
+    {
+      "test_id": "test_05",
+      "category": "emergency",
+      "is_supported": true,
+      "question": "What are the qSOFA criteria and clinical cutoffs for identifying sepsis?",
+      "expected_doc_ids": [],
+      "expected_pages": [
+        3
+      ],
+      "expected_keywords": [
+        "22",
+        "100"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.5477,
+        0.3399,
+        0.2669
+      ],
+      "llm_answer": "Based on verified clinical guidance from **Medical Reference Authority** (*medical_information.pdf*, `medical_information.pdf` — Page 3):\n\n• Sepsis & Septic Shock (qSOFA Criteria)\n- Normal Blood Pressure: Systolic < 120 mmHg and Diastolic < 80 mmHg.\n- Elevated Blood Pressure: Systolic 120-129 mmHg and Diastolic < 80 mmHg.\n- Hypertensive Crisis: Systolic > 180 mmHg and/or Diastolic > 120\n- Respiratory rate >= 22 breaths per minute.\n- Systolic blood pressure <= 100 mmHg.\n- Contraindications to Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5\n- Stage 1 Hypertension: Systolic 130-139 mmHg or Diastolic 80-89 mmHg.\n- Stage 2 Hypertension: Systolic >= 140 mmHg or Diastolic >= 90 mmHg.\n\n*(Answer synthesized via MediCore Local Grounding Engine — verified against Medical Reference Authority reference material.)*",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.5477,
+          "text_snippet": "Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho 2. Sepsis & Septic Shock (qSOFA..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.3399,
+          "text_snippet": "CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS Document ID: MED-REF-2026-03 | Emergency & Critical Care 1. ..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.2669,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: HYPERTENSION MANAGEMENT Document ID: MED-REF-2026-01 | Department of Internal Medicine 1. D..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "OK (Clinical keywords present & grounded in reference text)"
+    },
+    {
+      "test_id": "test_06",
+      "category": "emergency",
+      "is_supported": true,
+      "question": "What is the primary emergency medication, dosage, and administration route for anaphylaxis?",
+      "expected_doc_ids": [],
+      "expected_pages": [
+        3
+      ],
+      "expected_keywords": [
+        "epinephrine",
+        "0.3",
+        "intramuscular"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.5095,
+        0.4871,
+        0.4681
+      ],
+      "llm_answer": "Based on verified clinical guidance from **Medical Reference Authority** (*medical_information.pdf*, `medical_information.pdf` — Page 3):\n\n- Respiratory rate >= 22 breaths per minute.\n- Systolic blood pressure <= 100 mmHg.\n- Primary treatment: Epinephrine (1:1,000 / 1 mg/mL) 0.3-0.5 mg Intramuscularly into anterolateral thigh immedia\n• First-Line Pharmacotherapy\n- Never delay Epinephrine administration for secondary antihistamines or corticosteroids.\n• Anaphylaxis Emergency Action\n• (urticaria, angioedema) plus respiratory compromise or hypotension.\n• Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho\n• Sepsis & Septic Shock (qSOFA Criteria)\n\n*(Answer synthesized via MediCore Local Grounding Engine — verified against Medical Reference Authority reference material.)*",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk3",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.5095,
+          "text_snippet": "(urticaria, angioedema) plus respiratory compromise or hypotension. - Primary treatment: Epinephrine (1:1,000 / 1 mg/mL)..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.4871,
+          "text_snippet": "Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho 2. Sepsis & Septic Shock (qSOFA..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk3",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.4681,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "OK (Clinical keywords present & grounded in reference text)"
+    },
+    {
+      "test_id": "test_07",
+      "category": "emergency",
+      "is_supported": true,
+      "question": "What are the contraindications for administering Nitroglycerin in acute coronary syndrome?",
+      "expected_doc_ids": [],
+      "expected_pages": [
+        3
+      ],
+      "expected_keywords": [
+        "90",
+        "pde-5"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.7022,
+        0.5936,
+        0.4097
+      ],
+      "llm_answer": "Based on verified clinical guidance from **Medical Reference Authority** (*medical_information.pdf*, `medical_information.pdf` — Page 3):\n\n- Contraindications to Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5\n- First-line therapy: Metformin (initial 500 mg twice daily with meals, titrating up to 2000 mg/day)\n• Acute Coronary Syndrome (ACS) Red Flags\n- Respiratory rate >= 22 breaths per minute.\n- Systolic blood pressure <= 100 mmHg.\n• CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS\n- Immediate actions: Oxygen if SpO2 < 90%, Chewable Aspirin 324 mg, Sublingual Nitroglycerin (if not contraind\n• Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho\n• Sepsis & Septic Shock (qSOFA Criteria)\n\n*(Answer synthesized via MediCore Local Grounding Engine — verified against Medical Reference Authority reference material.)*",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.7022,
+          "text_snippet": "CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS Document ID: MED-REF-2026-03 | Emergency & Critical Care 1. ..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.5936,
+          "text_snippet": "Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho 2. Sepsis & Septic Shock (qSOFA..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page2_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 2,
+          "similarity_score": 0.4097,
+          "text_snippet": "history. 2. Pharmacotherapy Pathway - First-line therapy: Metformin (initial 500 mg twice daily with meals, titrating up..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "OK (Clinical keywords present & grounded in reference text)"
+    },
+    {
+      "test_id": "test_08",
+      "category": "multi_chunk",
+      "is_supported": true,
+      "question": "What non-pharmacological lifestyle interventions and sodium limits are recommended for managing hypertension?",
+      "expected_doc_ids": [],
+      "expected_pages": [
+        1
+      ],
+      "expected_keywords": [
+        "dash",
+        "1,500",
+        "sodium"
+      ],
+      "retrieval_result": "PASS",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.7152,
+        0.5474,
+        0.476
+      ],
+      "llm_answer": "Based on verified clinical guidance from **Medical Reference Authority** (*medical_information.pdf*, `medical_information.pdf` — Page 1):\n\n• Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg.\n- Sodium restriction: Target < 1,500 mg/day (or at least 1,000 mg/day reduction).\n- Physical activity: 90-150 minutes of aerobic and dynamic resistance exercise per week.\n- Normal Blood Pressure: Systolic < 120 mmHg and Diastolic < 80 mmHg.\n- Elevated Blood Pressure: Systolic 120-129 mmHg and Diastolic < 80 mmHg.\n- Stage 1 Hypertension: Systolic 130-139 mmHg or Diastolic 80-89 mmHg.\n- Stage 2 Hypertension: Systolic >= 140 mmHg or Diastolic >= 90 mmHg.\n- Hypertensive Crisis: Systolic > 180 mmHg and/or Diastolic > 120\n- Dietary Approaches to Stop Hypertension (DASH diet): High in vegetables, fruits, and whole grains.\n\n*(Answer synthesized via MediCore Local Grounding Engine — verified against Medical Reference Authority reference material.)*",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page1_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.7152,
+          "text_snippet": "Crisis: Systolic > 180 mmHg and/or Diastolic > 120 mmHg. 2. Initial Non-Pharmacological Interventions - Dietary Approach..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page1_chunk3",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.5474,
+          "text_snippet": "First-Line Pharmacotherapy - Thiazide diuretics (e.g., Chlorthalidone 12.5-25 mg daily, Hydrochlorothiazide 25-50 mg dai..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page1_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 1,
+          "similarity_score": 0.476,
+          "text_snippet": "CLINICAL PRACTICE GUIDELINE: HYPERTENSION MANAGEMENT Document ID: MED-REF-2026-01 | Department of Internal Medicine 1. D..."
+        }
+      ],
+      "retrieval_reason": "OK",
+      "answer_reason": "OK (Clinical keywords present & grounded in reference text)"
+    },
+    {
+      "test_id": "test_09",
+      "category": "unsupported",
+      "is_supported": false,
+      "question": "What is the recommended surgical or antibiotic treatment protocol for acute appendicitis?",
+      "expected_doc_ids": [],
+      "expected_pages": [],
+      "expected_keywords": [
+        "insufficient",
+        "not contain",
+        "does not contain",
+        "not mentioned"
+      ],
+      "retrieval_result": "PASS (OOD)",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.374,
+        0.2951,
+        0.2914
+      ],
+      "llm_answer": "The available reference material does not contain sufficient information to answer this question.",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk3",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.374,
+          "text_snippet": "(urticaria, angioedema) plus respiratory compromise or hypotension. - Primary treatment: Epinephrine (1:1,000 / 1 mg/mL)..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk2",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.2951,
+          "text_snippet": "Nitroglycerin: SBP < 90 mmHg, severe bradycardia, or PDE-5 inhibitor use within 24-48 ho 2. Sepsis & Septic Shock (qSOFA..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page3_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.2914,
+          "text_snippet": "CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS Document ID: MED-REF-2026-03 | Emergency & Critical Care 1. ..."
+        }
+      ],
+      "retrieval_reason": "Out-of-domain query (Top-1 similarity: 0.374 < 0.50 threshold: correctly recognized as low relevance)",
+      "answer_reason": "OK (Safe refusal confirmed; zero hallucination)"
+    },
+    {
+      "test_id": "test_10",
+      "category": "unsupported",
+      "is_supported": false,
+      "question": "What are the surgical steps and prosthetic mesh placement techniques for repairing an inguinal hernia?",
+      "expected_doc_ids": [],
+      "expected_pages": [],
+      "expected_keywords": [
+        "insufficient",
+        "not contain",
+        "does not contain",
+        "not mentioned"
+      ],
+      "retrieval_result": "PASS (OOD)",
+      "top1_match": true,
+      "top3_match": true,
+      "answer_result": "PASS",
+      "source_result": "PASS",
+      "overall_result": "PASS",
+      "similarity_scores": [
+        0.2143,
+        0.0896,
+        0.0792
+      ],
+      "llm_answer": "The available reference material does not contain sufficient information to answer this question.",
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "page3_chunk3",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.2143,
+          "text_snippet": "(urticaria, angioedema) plus respiratory compromise or hypotension. - Primary treatment: Epinephrine (1:1,000 / 1 mg/mL)..."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "page3_chunk1",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 3,
+          "similarity_score": 0.0896,
+          "text_snippet": "CRITICAL PROTOCOLS: EMERGENCY RED FLAGS & CONTRAINDICATIONS Document ID: MED-REF-2026-03 | Emergency & Critical Care 1. ..."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "page2_chunk3",
+          "document_id": "medical_information.pdf",
+          "source_organization": "Medical Reference Authority",
+          "page_number": 2,
+          "similarity_score": 0.0792,
+          "text_snippet": "0.5-1.0 mg weekly, Liraglutide 1.2-1.8 mg daily). 3. Monitoring and Complication Screenings - Annual comprehensive foot ..."
+        }
+      ],
+      "retrieval_reason": "Out-of-domain query (Top-1 similarity: 0.214 < 0.50 threshold: correctly recognized as low relevance)",
+      "answer_reason": "OK (Safe refusal confirmed; zero hallucination)"
+    }
+  ]
+}
