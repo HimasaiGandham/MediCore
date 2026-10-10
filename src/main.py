@@ -193,15 +193,21 @@ def create_chunks_with_metadata(
 # Phase 3: Sentence Transformer Embeddings
 # =====================================================================
 
+_EMBEDDING_MODEL_CACHE: dict = {}
+
 def load_embedding_model(
     model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
 ) -> SentenceTransformer:
     """
-    Loads the sentence-transformer embedding model once in memory.
+    Loads the sentence-transformer embedding model once in memory (cached singleton).
     """
+    if model_name in _EMBEDDING_MODEL_CACHE:
+        return _EMBEDDING_MODEL_CACHE[model_name]
+
     print(f"Loading embedding model: '{model_name}'...")
     try:
         model = SentenceTransformer(model_name)
+        _EMBEDDING_MODEL_CACHE[model_name] = model
         print("Embedding model loaded successfully.\n")
         return model
     except Exception as e:
@@ -406,34 +412,68 @@ def synthesize_local_grounded_answer(query: str, retrieved_chunks: list[dict]) -
     doc_id = top_chunk.get("document_id", top_chunk.get("document_name", "REF"))
     sec_title = top_chunk.get("section_title", f"Page {top_chunk.get('page_number', 1)}")
 
+    import re
+
     # Extract distinct, informative sentences from top chunks
     key_points = []
     seen_texts = set()
+    query_tokens = [w.lower() for w in re.findall(r'\b[a-zA-Z0-9_\-]+\b', query) if len(w) > 2]
 
+    candidates = []
     for c in retrieved_chunks:
         text = c.get("text", "").strip()
         if not text or text in seen_texts:
             continue
         seen_texts.add(text)
 
-        # Split into distinct sentences/statements
-        import re
-        sentences = re.split(r'(?<=[.!?])\s+|\n+', text)
-        for s in sentences:
-            s_clean = s.strip()
-            if len(s_clean) > 25 and not s_clean.startswith("Document ID:"):
-                if s_clean not in key_points:
-                    key_points.append(s_clean)
-            if len(key_points) >= 6:
-                break
-        if len(key_points) >= 6:
+        # Split into distinct sentences or bullet lines (including numbered semicolon lists)
+        raw_lines = text.split("\n")
+        for line in raw_lines:
+            line_str = line.strip()
+            if not line_str:
+                continue
+            if line_str.startswith("Document ID:") or line_str.startswith("CLINICAL PRACTICE GUIDELINE:") or line_str.startswith("Section "):
+                continue
+            # Split on sentence boundaries and semicolon-delimited clinical items
+            sentences = re.split(r'(?<!\b\d)(?<=[.!?])\s+|;\s*', line_str)
+            for s in sentences:
+                s_clean = s.strip()
+                # Discard very short fragments or incomplete header stems
+                if len(s_clean) < 25 or s_clean.endswith(":") or re.search(r':\s*\d+\.?$', s_clean):
+                    continue
+                s_lower = s_clean.lower()
+                relevance = sum(2 for qt in query_tokens if qt in s_lower)
+                if any(char.isdigit() for char in s_clean):
+                    relevance += 3
+                if any(k in s_lower for k in ["criteria", "cutoff", "target", "dose", "first-line", "contraindicat", "protocol", "warning", "systolic", "respiratory", "hba1c", "blood pressure", "dash", "diet", "lifestyle", "exercise", "sodium", "aerobic"]):
+                    relevance += 3
+                candidates.append((relevance, s_clean))
+
+    # Sort candidates by relevance while preserving deduplication
+    seen_points = set()
+    for _, s_text in sorted(candidates, key=lambda x: x[0], reverse=True):
+        norm_s = s_text.lower()
+        if not any(norm_s in p or p in norm_s for p in seen_points):
+            seen_points.add(norm_s)
+            key_points.append(s_text)
+        if len(key_points) >= 10:
             break
+
+    # If no high-relevance sentences matched, fallback to natural order
+    if not key_points:
+        for _, s_text in candidates:
+            norm_s = s_text.lower()
+            if not any(norm_s in p or p in norm_s for p in seen_points):
+                seen_points.add(norm_s)
+                key_points.append(s_text)
+            if len(key_points) >= 8:
+                break
 
     output_lines = [
         f"Based on verified clinical guidance from **{org}** (*{doc_title}*, `{doc_id}` — {sec_title}):\n"
     ]
 
-    for pt in key_points[:5]:
+    for pt in key_points[:9]:
         if pt.startswith("-") or pt.startswith("•"):
             output_lines.append(pt)
         else:
@@ -522,15 +562,26 @@ def generate_answer(query: str, retrieved_chunks: list[dict], engine_mode: Optio
         gemini_key not in {"", "YOUR_GEMINI_API_KEY_HERE", "your_api_key_here"}
     )
 
+    global _GENAI_CLIENT
     if gemini_configured and engine in {"auto", "gemini"}:
         prompt = build_grounded_prompt(query, retrieved_chunks)
-        primary_model = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
-        candidate_models = list(dict.fromkeys([primary_model, "gemini-3.1-flash-lite", "gemini-3.5-flash-lite"]))
+        primary_model = os.getenv("GEMINI_MODEL", "gemini-flash-lite-latest")
+        candidate_models = list(dict.fromkeys([primary_model, "gemini-flash-lite-latest", "gemini-flash-latest", "gemini-3.8-flash"]))
 
+        if "_GENAI_CLIENT" not in globals() or _GENAI_CLIENT is None:
+            try:
+                _GENAI_CLIENT = genai.Client(api_key=gemini_key)
+            except Exception:
+                _GENAI_CLIENT = None
+
+        client = _GENAI_CLIENT
+        gemini_error = None
         for model_name in candidate_models:
             for attempt in range(2):
                 try:
-                    client = genai.Client(api_key=gemini_key)
+                    if client is None:
+                        client = genai.Client(api_key=gemini_key)
+                        _GENAI_CLIENT = client
                     response = client.models.generate_content(
                         model=model_name,
                         contents=prompt,
@@ -539,11 +590,19 @@ def generate_answer(query: str, retrieved_chunks: list[dict], engine_mode: Optio
                         return response.text.strip()
                 except Exception as e:
                     err_str = str(e)
+                    gemini_error = err_str
                     # Break out immediately if daily quota exceeded
-                    if "generaterequestsperday" in err_str.lower() or "resource_exhausted" in err_str.lower():
+                    if "generaterequestsperday" in err_str.lower() or "resource_exhausted" in err_str.lower() or "429" in err_str:
                         break
-                    if "503" in err_str or "UNAVAILABLE" in err_str:
+                    if "503" in err_str or "unavailable" in err_str.lower():
                         break
+
+        # If user specifically requested 'gemini' (strict mode), report quota/error rather than silently masking
+        if engine == "gemini":
+            if gemini_error and ("resource_exhausted" in gemini_error.lower() or "generaterequestsperday" in gemini_error.lower() or "429" in gemini_error):
+                return "[API_QUOTA_EXHAUSTED] Google Gemini free-tier daily rate/quota limit reached."
+            elif gemini_error:
+                return f"[API_ERROR] Google Gemini request failed: {gemini_error}"
 
     # Cloud Alternative: Groq API (if key available and Auto mode)
     if engine in {"auto", "groq"} and groq_key and groq_key not in {"", "YOUR_GROQ_API_KEY_HERE"}:

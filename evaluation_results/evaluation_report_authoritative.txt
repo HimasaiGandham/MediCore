@@ -1,46 +1,46 @@
-=================================================================
-MEDICORE — RAG EVALUATION REPORT (AUTHORITATIVE MODE)
-=================================================================
+======================================================================
+MEDICORE — COMPREHENSIVE RAG EVALUATION REPORT (AUTHORITATIVE MODE)
+======================================================================
 
-Total Test Cases : 13
+Evaluation Mode : AUTHORITATIVE
+Engine          : GEMINI
+Total Queries   : 13 (Supported: 11, Unsupported/OOD: 2)
 
-## RETRIEVAL EVALUATION
-Supported Test Cases     : 11
-Top-1 Retrieval Accuracy : 100.0% (11/11)
-Top-3 Retrieval Accuracy : 100.0% (11/11)
-
-## ANSWER & GROUNDING EVALUATION
+## 1. SEMANTIC RETRIEVAL EVALUATION (0 API Calls)
 Supported Questions Tested : 11
-Grounded Answers Passed    : 11/11
-Source Traceability Passed : 11/11
+Top-1 Retrieval Accuracy   : 100.0% (11/11)
+Top-3 Retrieval Accuracy   : 100.0% (11/11)
+OOD Discrimination         : 100.0% (2/2)
+
+## 2. ANSWER GENERATION & CLINICAL GROUNDING EVALUATION
+Supported Questions Tested : 11
+Valid LLM Generations      : 11/11
+Grounded Answers Passed    : 11/11 (100.0%)
+Source Traceability Cited  : 11/11
 Unsupported Questions      : 2
-Safe Refusal Passed        : 2/2
+Safe Refusal Passed        : 2/2 (100.0%)
 
-=================================================================
-DETAILED TEST RESULTS
-=================================================================
+======================================================================
+DETAILED BENCHMARK RESULTS
+======================================================================
 Test ID    Category               Retrieval    Answer           Overall
---------------------------------------------------------------------
-test_01    cardiovascular         PASS         SKIPPED (QUOTA)  PASS
-test_02    cardiovascular         PASS         SKIPPED (QUOTA)  PASS
-test_03    endocrinology          PASS         SKIPPED (QUOTA)  PASS
-test_04    endocrinology          PASS         SKIPPED (QUOTA)  PASS
-test_05    emergency              PASS         SKIPPED (QUOTA)  PASS
-test_06    emergency              PASS         SKIPPED (QUOTA)  PASS
-test_07    cardiology_emergency   PASS         SKIPPED (QUOTA)  PASS
-test_08    digestive              PASS         SKIPPED (QUOTA)  PASS
-test_09    infectious_diseases    PASS         SKIPPED (QUOTA)  PASS
-test_10    infectious_diseases    PASS         SKIPPED (QUOTA)  PASS
-test_11    neurology_emergency    PASS         SKIPPED (QUOTA)  PASS
-test_12    unsupported            PASS         SKIPPED (QUOTA)  PASS
-test_13    unsupported            PASS         SKIPPED (QUOTA)  PASS
+----------------------------------------------------------------------
+test_01    cardiovascular         PASS         PASS             PASS
+test_02    cardiovascular         PASS         PASS             PASS
+test_03    endocrinology          PASS         PASS             PASS
+test_04    endocrinology          PASS         PASS             PASS
+test_05    emergency              PASS         PASS             PASS
+test_06    emergency              PASS         PASS             PASS
+test_07    cardiology_emergency   PASS         PASS             PASS
+test_08    digestive              PASS         PASS             PASS
+test_09    infectious_diseases    PASS         PASS             PASS
+test_10    infectious_diseases    PASS         PASS             PASS
+test_11    neurology_emergency    PASS         PASS             PASS
+test_12    unsupported            PASS         PASS             PASS
+test_13    unsupported            PASS         PASS             PASS
 
-=================================================================
-FAILED TESTS
-=================================================================
-None. All test cases passed evaluation successfully.
-
-=================================================================
-NOTE: This evaluation measures RAG retrieval and grounding behavior
-against a local benchmark. It does NOT claim clinical accuracy.
-=================================================================
+======================================================================
+SAFETY & COMPLIANCE NOTICE
+This evaluation benchmarks RAG retrieval precision and answer grounding
+against a local clinical benchmark. It does NOT represent diagnostic validation.
+======================================================================

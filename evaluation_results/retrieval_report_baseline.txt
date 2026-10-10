@@ -1,0 +1,31 @@
+====================================================================
+MEDICORE — RETRIEVAL EVALUATION REPORT (BASELINE MODE)
+====================================================================
+
+Total Benchmark Queries : 10
+Supported Clinical Cases: 8
+Unsupported (OOD) Cases : 2
+
+## SEMANTIC RETRIEVAL METRICS (0 LLM API Calls)
+Top-1 Retrieval Accuracy : 100.0% (8/8)
+Top-3 Retrieval Accuracy : 100.0% (8/8)
+Clinical Keyword Recall  : 100.0% (8/8)
+Source Provenance Valid  : 100.0% (8/8)
+
+====================================================================
+Test ID    Category               Top-1   Top-3   Keywords   Sim     Status
+--------------------------------------------------------------------
+test_01    factual                YES     YES     YES        0.695   PASS
+test_02    factual                YES     YES     YES        0.662   PASS
+test_03    diabetes               YES     YES     YES        0.732   PASS
+test_04    diabetes               YES     YES     YES        0.559   PASS
+test_05    emergency              YES     YES     YES        0.548   PASS
+test_06    emergency              YES     YES     YES        0.509   PASS
+test_07    emergency              YES     YES     YES        0.702   PASS
+test_08    multi_chunk            YES     YES     YES        0.715   PASS
+test_09    unsupported            YES     YES     N/A        0.374   PASS (OOD)
+test_10    unsupported            YES     YES     N/A        0.214   PASS (OOD)
+--------------------------------------------------------------------
+
+NOTE: Pure vector retrieval benchmark. Evaluates embedding & FAISS index precision.
+====================================================================
