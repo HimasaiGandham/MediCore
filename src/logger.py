@@ -35,8 +35,9 @@ def setup_logger(name="medicore_audit"):
     Sets up a structured JSON logger for operational audit trails.
     """
     logger = logging.getLogger(name)
+    logger.propagate = False
     
-    if logger.hasHandlers():
+    if logger.handlers:
         return logger
 
     logger.setLevel(logging.INFO)

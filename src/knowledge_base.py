@@ -255,6 +255,7 @@ def search_knowledge_base(
     top_k: int = 3,
     category_filter: Optional[str] = None,
     organization_filter: Optional[str] = None,
+    request_id: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     """
     Performs semantic search with Cosine Similarity across the complete
@@ -263,14 +264,27 @@ def search_knowledge_base(
     if not query or not query.strip():
         return []
 
+    import time
+    from src.logger import log_query_lifecycle
+    
     clean_query = query.strip()
+    
+    # Embedding Timing
+    emb_start = time.monotonic()
     query_vector = model.encode([clean_query], convert_to_numpy=True)
     query_vector = np.asarray(query_vector, dtype=np.float32)
     faiss.normalize_L2(query_vector)
+    emb_dur = (time.monotonic() - emb_start) * 1000
+    if request_id:
+        log_query_lifecycle(request_id, "query_embedding", "success", duration_ms=emb_dur)
 
-    # If filters are present, search a wider candidate pool and filter
+    # FAISS Search Timing
+    faiss_start = time.monotonic()
     search_k = min(top_k * 5 if (category_filter or organization_filter) else top_k, index.ntotal)
     distances, indices = index.search(query_vector, search_k)
+    faiss_dur = (time.monotonic() - faiss_start) * 1000
+    if request_id:
+        log_query_lifecycle(request_id, "faiss_search", "success", duration_ms=faiss_dur, num_results=search_k)
 
     results = []
     rank = 1

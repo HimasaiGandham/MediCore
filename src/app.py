@@ -598,6 +598,7 @@ def process_user_query(
         chunks=chunks,
         top_k=top_k,
         category_filter=category_filter,
+        request_id=req_id,
     )
     retrieval_duration = (time.monotonic() - retrieval_start) * 1000
     log_query_lifecycle(req_id, "query_retrieval", "success", duration_ms=retrieval_duration, num_results=len(retrieved_chunks))
@@ -629,7 +630,10 @@ def process_user_query(
         })
 
     # 3. Grounded Answer Generation (Gemini -> Groq -> Local Grounded Engine)
+    ans_start = time.monotonic()
     answer_text = generate_answer(clean_query, retrieved_chunks, engine_mode=engine_mode)
+    ans_duration = (time.monotonic() - ans_start) * 1000
+    log_query_lifecycle(req_id, "answer_generation", "success", duration_ms=ans_duration, engine=engine_mode)
 
     # 4. Determine state flags
     is_refusal = (
