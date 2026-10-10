@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "document_id": "CDC-CLIN-DIAB-2024",
+    "source_organization": "Centers for Disease Control and Prevention (CDC)",
+    "organization_level": "Level 1 — Government & Official Medical Organization",
+    "document_title": "Clinical Diabetes Overview: Diagnostic Standards, Glycemic Targets, Pharmacotherapy, and Complication Screening",
+    "source_url": "https://www.cdc.gov/diabetes/about/index.html",
+    "document_type": "Official Public Health Clinical Resource",
+    "publication_date": "2024-05-15",
+    "last_reviewed": "2026-08-10",
+    "retrieval_date": "2026-10-08",
+    "topic_category": "Endocrinology & Diabetes",
+    "country_or_scope": "United States / Global Reference",
+    "source_domain": "cdc.gov"
+  },
+  "sections": [
+    {
+      "section_number": 1,
+      "page_number": 1,
+      "section_title": "Pathophysiology and Diagnostic Standards",
+      "text": "Diabetes is a chronic metabolic condition characterized by persistent hyperglycemia resulting from defects in insulin secretion, insulin action, or both. In Type 1 diabetes, autoimmune destruction of pancreatic beta cells causes absolute insulin deficiency. In Type 2 diabetes, peripheral insulin resistance coupled with progressive secretory defect leads to relative insulin deficiency. Diagnosis is established based on any of the following criteria confirmed on repeat testing: 1. Fasting plasma glucose (FPG) >= 126 mg/dL (7.0 mmol/L) after an 8-hour fast; 2. Hemoglobin A1c (HbA1c) >= 6.5% (48 mmol/mol) using a NGSP-certified assay; 3. Two-hour plasma glucose >= 200 mg/dL (11.1 mmol/L) during a 75 g oral glucose tolerance test (OGTT); 4. Random plasma glucose >= 200 mg/dL (11.1 mmol/L) in a patient with classic symptoms of hyperglycemia (polyuria, polydipsia, unexplained weight loss) or hyperglycemic crisis."
+    },
+    {
+      "section_number": 2,
+      "page_number": 1,
+      "section_title": "Clinical Glycemic Targets for Non-Pregnant Adults",
+      "text": "The recommended glycemic targets for non-pregnant adults with diabetes include: 1. Target HbA1c: < 7.0% (53 mmol/mol) for most non-pregnant adults to reduce microvascular complications (retinopathy, nephropathy, and neuropathy); 2. Preprandial capillary plasma glucose: 80-130 mg/dL (4.4-7.2 mmol/L); 3. Peak postprandial capillary plasma glucose (1-2 hours after meals): < 180 mg/dL (10.0 mmol/L). Less stringent HbA1c goals (such as < 8.0% or 64 mmol/mol) are appropriate for patients with a history of severe hypoglycemia, limited life expectancy, advanced microvascular or macrovascular complications, or extensive comorbid conditions."
+    },
+    {
+      "section_number": 3,
+      "page_number": 2,
+      "section_title": "First-Line Pharmacotherapy and Titration Protocol",
+      "text": "First-line pharmacological therapy for Type 2 diabetes is Metformin (biguanide class) combined with lifestyle modifications. Metformin is initiated at a starting dose of 500 mg once or twice daily with meals (or 850 mg once daily) to minimize gastrointestinal adverse effects (nausea, diarrhea, abdominal cramping), and gradually titrated over several weeks up to a maximum recommended dose of 2,000 mg/day (or 2,550 mg/day in divided doses). Metformin improves peripheral insulin sensitivity, suppresses hepatic gluconeogenesis, and carries minimal intrinsic hypoglycemia risk. It is contraindicated in patients with severe renal impairment (estimated glomerular filtration rate eGFR < 30 mL/min/1.73 m2) due to lactic acidosis risk."
+    },
+    {
+      "section_number": 4,
+      "page_number": 2,
+      "section_title": "Second-Line Agents for Cardiovascular and Renal Protection",
+      "text": "In patients with Type 2 diabetes and established atherosclerotic cardiovascular disease (ASCVD), heart failure (HF), or chronic kidney disease (CKD), second-line therapy with proven organ-protective benefit is recommended regardless of baseline HbA1c: 1. Sodium-glucose cotransporter-2 (SGLT2) inhibitors (e.g., Empagliflozin 10-25 mg daily, Dapagliflozin 10 mg daily): promote urinary glucose excretion, reduce heart failure hospitalizations, and slow CKD progression; 2. Glucagon-like peptide-1 (GLP-1) receptor agonists (e.g., Semaglutide 0.5-1.0 mg weekly, Dulaglutide 0.75-1.5 mg weekly): enhance glucose-dependent insulin secretion, suppress glucagon, promote satiety, and reduce major adverse cardiovascular events (MACE)."
+    },
+    {
+      "section_number": 5,
+      "page_number": 3,
+      "section_title": "Routine Complication Screenings and Preventive Care",
+      "text": "Comprehensive diabetes management requires regular screening for chronic microvascular and macrovascular complications: 1. Annual comprehensive diabetic foot examination, assessing bilateral skin integrity, pedal pulses, and protective sensation using a 10 g monofilament to prevent diabetic foot ulcers; 2. Annual urinary albumin-to-creatinine ratio (uACR) and estimated GFR to screen for diabetic kidney disease; 3. Dilated eye examination every 1 to 2 years performed by an optometrist or ophthalmologist to detect diabetic retinopathy; 4. Annual lipid profile and blood pressure monitoring targeting < 130/80 mmHg."
+    }
+  ]
+}
