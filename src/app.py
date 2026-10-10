@@ -61,6 +61,7 @@ from src.knowledge_base import (
     get_knowledge_base_statistics,
     load_catalog,
 )
+from src.logger import log_system_event, log_query_lifecycle, generate_request_id
 
 
 # =====================================================================
@@ -431,12 +432,15 @@ def load_rag_pipeline():
     2. Builds or loads persistent FAISS index & authoritative medical chunks
     3. Loads central catalog & aggregate statistics across official medical authorities
     """
+    start_t = time.monotonic()
     model = load_embedding_model("sentence-transformers/all-MiniLM-L6-v2")
     try:
         faiss_index, chunks = build_or_load_knowledge_base(model)
         stats = get_knowledge_base_statistics(chunks)
         catalog = load_catalog()
+        log_system_event("system_startup", "success", {"duration_ms": (time.monotonic()-start_t)*1000})
     except Exception as e:
+        log_system_event("system_startup_error", "failure", {"safe_error": type(e).__name__}, level="error")
         pdf_path = PROJECT_ROOT / "documents" / "medical_information.pdf"
         pages_data = extract_text_from_pdf(pdf_path)
         chunks = create_chunks_with_metadata(pages_data, pdf_path.name, chunk_size=500, overlap=50)
@@ -581,7 +585,12 @@ def process_user_query(
     if not clean_query:
         return
 
+    req_id = generate_request_id()
+    log_query_lifecycle(req_id, "query_start", "processing", engine=engine_mode)
+    start_time = time.monotonic()
+
     # 1. Semantic Retrieval across Authoritative Knowledge Base
+    retrieval_start = time.monotonic()
     retrieved_chunks = search_knowledge_base(
         query=clean_query,
         model=model,
@@ -589,7 +598,10 @@ def process_user_query(
         chunks=chunks,
         top_k=top_k,
         category_filter=category_filter,
+        request_id=req_id,
     )
+    retrieval_duration = (time.monotonic() - retrieval_start) * 1000
+    log_query_lifecycle(req_id, "query_retrieval", "success", duration_ms=retrieval_duration, num_results=len(retrieved_chunks))
 
     # 2. Extract structured source details with complete provenance
     sources = []
@@ -618,7 +630,10 @@ def process_user_query(
         })
 
     # 3. Grounded Answer Generation (Gemini -> Groq -> Local Grounded Engine)
+    ans_start = time.monotonic()
     answer_text = generate_answer(clean_query, retrieved_chunks, engine_mode=engine_mode)
+    ans_duration = (time.monotonic() - ans_start) * 1000
+    log_query_lifecycle(req_id, "answer_generation", "success", duration_ms=ans_duration, engine=engine_mode)
 
     # 4. Determine state flags
     is_refusal = (
@@ -642,6 +657,14 @@ def process_user_query(
         "is_refusal": is_refusal,
         "is_quota_error": is_quota_error,
     })
+    
+    total_duration = (time.monotonic() - start_time) * 1000
+    if is_quota_error:
+        log_query_lifecycle(req_id, "query_complete", "quota_fallback", duration_ms=total_duration, num_results=len(sources), engine=engine_mode, error_category="quota_exhausted")
+    elif is_refusal:
+        log_query_lifecycle(req_id, "query_complete", "refusal", duration_ms=total_duration, num_results=len(sources), engine=engine_mode)
+    else:
+        log_query_lifecycle(req_id, "query_complete", "success", duration_ms=total_duration, num_results=len(sources), engine=engine_mode)
 
 
 def render_sources(sources: list[dict]):

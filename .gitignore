@@ -9,3 +9,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 .streamlit/credentials.toml
+
+# Logs
+logs/
+*.log
