@@ -1,140 +1,42 @@
-# 🩺 MediCore – Healthcare Information Assistant
-
-> **Making medical information easier to find.**
-
-MediCore is a healthcare-focused project that helps users find relevant information from **medical documents** without having to manually search through long PDFs.
-
-Instead of reading through hundreds of pages, users can simply ask a question, and MediCore finds the relevant information and provides an answer along with its **source and page details**.
+# 🧭 MediCore — Medical Question Intent Detection
+> **Branch:** `feature/intent-detection`  
+> **Role in MediCore:** Figuring out what kind of medical question the user is asking.
 
 ---
 
-## 🚀 Project Overview
-
-The main idea behind MediCore is simple:
-
-**Ask a question → Find relevant information → Generate an answer → Show the source**
-
-For example:
-
-| User Question | MediCore Response |
-|---|---|
-| What are the criteria for Stage 2 hypertension? | Relevant information from the medical document |
-| What are the glycemic targets for Type 2 diabetes? | Relevant information with source details |
-| What is the treatment for appendicitis? | Information not available in the provided documents |
-
-If the required information is not available, MediCore avoids generating an unsupported answer.
+### 🌟 What is this branch all about?
+Not all medical questions are the same! A person asking about an emergency needs a very different response than a student studying the history of diabetes. This branch provides **Intent Detection** 🧭 to understand the purpose of every question.
 
 ---
 
-## ✨ Features
+### 💡 Why do we need this in MediCore?
+Consider these 3 questions:
+1. *"My friend is having severe chest pain and can't breathe!"* &rarr; **Emergency Intent!** 🚨 (Show urgent 911 warning first!)
+2. *"What is the standard dosage for Metformin?"* &rarr; **Medication Intent!** 💊 (Highlight dosage & precautions)
+3. *"Which WHO guideline covers hypertension?"* &rarr; **Catalog Lookup Intent!** 📚 (Show catalog details)
 
-- 📄 Medical document processing
-- 🔎 Relevant information retrieval
-- 🧠 AI-generated answers based on available documents
-- 📑 Source and page information
-- 🚫 Handling of unsupported questions
-- 📊 Retrieval evaluation
-- 💬 Simple and easy-to-use interface
-- ⚡ Quick access to information from lengthy documents
+Intent detection ensures each question gets the right tone, urgency, and layout!
 
 ---
 
-## 🛠️ Technologies Used
-
-- **Python** – Main development language
-- **PyMuPDF** – Medical PDF processing
-- **Sentence Transformers** – Text representation
-- **FAISS** – Relevant information retrieval
-- **Gemini** – Answer generation
-- **Streamlit** – User interface
+### ⚙️ How does it work in simple words?
+1. **Analyze the Question:** Inspects key words and question structure 🔍.
+2. **Classify Intent:** Categorizes the inquiry (Emergency, Guideline Lookup, Treatment, Definition, or General Inquiry) 🏷️.
+3. **Route Appropriately:** Directs the query through specialized pipelines (e.g., adding emergency banners for critical symptoms) 🚦.
 
 ---
 
-## 🎯 Project Objective
-
-The objective of MediCore is to make medical information **easier and faster to find** from lengthy reference documents.
-
-The project demonstrates the practical use of:
-
-- Retrieval-Augmented Generation
-- Natural Language Processing
-- Semantic Search
-- Document Processing
-- Artificial Intelligence
-- Information Retrieval
+### 🤝 How this branch contributes to MediCore
+- 🚨 **Life-Saving Prioritization:** Immediately flags emergency situations and advises urgent medical help.
+- 🎯 **Tailored Responses:** Formats answers according to what the user needs.
+- ⚡ **Smarter Routing:** Skips unnecessary steps for simple catalog lookups.
 
 ---
 
-## 💡 Why MediCore?
-
-Sometimes even a simple health-related doubt can make us search through long articles, websites, and medical PDFs.
-
-We wanted to make that process easier by creating a system where users can **ask their question directly and quickly find relevant information from the available medical documents**.
-
-MediCore also shows where the information came from, making the answer easier to verify.
+### 🦄 What makes this branch unique?
+This branch acts as the **triage nurse of MediCore**. It listens to the user's intent before deciding how the system should handle the question.
 
 ---
 
-## 📊 Evaluation
-
-MediCore was tested using questions based on the available medical documents.
-
-| Evaluation | Result |
-|---|---:|
-| Top-1 Retrieval Accuracy | **100%** |
-| Top-3 Retrieval Accuracy | **100%** |
-
-Unsupported questions were also tested to check whether the system avoids providing information that is not available in the documents.
-
----
-
-## 👨‍💻 Project Status
-
-### ✅ Main System Completed
-
-MediCore can currently:
-
-- Process medical documents
-- Retrieve relevant information
-- Generate answers using retrieved content
-- Display source and page details
-- Handle unsupported questions
-- Provide a simple user interface
-
-The next step is to improve retrieval for more complex questions and expand the available medical documents.
-
----
-
-## 🔮 Future Scope
-
-- 📚 Add more medical documents
-- 📄 Support different document formats
-- 🔎 Improve retrieval for complex questions
-- 💬 Add conversation history
-- 🎨 Improve the user interface
-- 🌐 Make the application available online
-- 🏥 Expand coverage to more healthcare topics
-
----
-
-## 📖 Learning Reference
-
-The basic RAG concept was learned from **LangChain's RAG From Scratch** project.
-
-We used it to understand the basic idea of retrieving relevant information before generating an answer, and then applied the concept to our own healthcare-focused project, **MediCore**.
-
----
-
-## ⚠️ Disclaimer
-
-MediCore is an **academic project** created for educational and informational purposes.
-
-It is not intended to provide medical diagnosis, treatment, or professional medical advice.
-
-For medical concerns, users should consult a qualified healthcare professional.
-
----
-
-## ⭐ MediCore
-
-**Ask your question. Find the information. Know the source.**
+### ⚠️ Important Health Reminder
+MediCore is an educational and reference assistant. It does not replace the judgment of a licensed doctor. Always call your local emergency service in critical situations! 🚑
