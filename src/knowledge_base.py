@@ -32,8 +32,8 @@ os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 import faiss
 from sentence_transformers import SentenceTransformer
 
+# Reuse chunk_text and extract_text_from_pdf from src/main.py
 from src.main import chunk_text, extract_text_from_pdf
-from src.logger import log_system_event
 
 
 INDEX_DIR = PROJECT_ROOT / "documents" / ".index"
@@ -205,11 +205,9 @@ def build_or_load_knowledge_base(
             with open(chunks_file, "rb") as f:
                 chunks = pickle.load(f)
             print(f"Loaded {len(chunks)} chunks and FAISS index with {index.ntotal} vectors.\n")
-            log_system_event("index_load", "success", {"cached": True, "num_chunks": len(chunks), "num_vectors": index.ntotal})
             return index, chunks
         except Exception as e:
             print(f"[WARNING] Cache load failed ({e}), rebuilding index...")
-            log_system_event("index_load_error", "failure", {"safe_error": type(e).__name__}, level="warning")
 
     # Build fresh index
     print("Building fresh knowledge base vector index...")
@@ -239,10 +237,8 @@ def build_or_load_knowledge_base(
         with open(chunks_file, "wb") as f:
             pickle.dump(chunks, f, protocol=pickle.HIGHEST_PROTOCOL)
         print(f"Cached FAISS index and {len(chunks)} chunks to {INDEX_DIR}.\n")
-        log_system_event("index_rebuild", "success", {"num_chunks": len(chunks), "num_vectors": index.ntotal})
     except Exception as e:
         print(f"[WARNING] Failed to persist index cache: {e}")
-        log_system_event("index_rebuild_persist_error", "failure", {"safe_error": type(e).__name__}, level="warning")
 
     return index, chunks
 
@@ -255,7 +251,6 @@ def search_knowledge_base(
     top_k: int = 3,
     category_filter: Optional[str] = None,
     organization_filter: Optional[str] = None,
-    request_id: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     """
     Performs semantic search with Cosine Similarity across the complete
@@ -264,27 +259,14 @@ def search_knowledge_base(
     if not query or not query.strip():
         return []
 
-    import time
-    from src.logger import log_query_lifecycle
-    
     clean_query = query.strip()
-    
-    # Embedding Timing
-    emb_start = time.monotonic()
     query_vector = model.encode([clean_query], convert_to_numpy=True)
     query_vector = np.asarray(query_vector, dtype=np.float32)
     faiss.normalize_L2(query_vector)
-    emb_dur = (time.monotonic() - emb_start) * 1000
-    if request_id:
-        log_query_lifecycle(request_id, "query_embedding", "success", duration_ms=emb_dur)
 
-    # FAISS Search Timing
-    faiss_start = time.monotonic()
+    # If filters are present, search a wider candidate pool and filter
     search_k = min(top_k * 5 if (category_filter or organization_filter) else top_k, index.ntotal)
     distances, indices = index.search(query_vector, search_k)
-    faiss_dur = (time.monotonic() - faiss_start) * 1000
-    if request_id:
-        log_query_lifecycle(request_id, "faiss_search", "success", duration_ms=faiss_dur, num_results=search_k)
 
     results = []
     rank = 1
