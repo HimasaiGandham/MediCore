@@ -1,140 +1,40 @@
-# 🩺 MediCore – Healthcare Information Assistant
-
-> **Making medical information easier to find.**
-
-MediCore is a healthcare-focused project that helps users find relevant information from **medical documents** without having to manually search through long PDFs.
-
-Instead of reading through hundreds of pages, users can simply ask a question, and MediCore finds the relevant information and provides an answer along with its **source and page details**.
+# 📥 MediCore — Medical Document Ingestion Pipeline
+> **Branch:** `feature/document-ingestion`  
+> **Role in MediCore:** Automatically loading and importing official clinical guidance files.
 
 ---
 
-## 🚀 Project Overview
-
-The main idea behind MediCore is simple:
-
-**Ask a question → Find relevant information → Generate an answer → Show the source**
-
-For example:
-
-| User Question | MediCore Response |
-|---|---|
-| What are the criteria for Stage 2 hypertension? | Relevant information from the medical document |
-| What are the glycemic targets for Type 2 diabetes? | Relevant information with source details |
-| What is the treatment for appendicitis? | Information not available in the provided documents |
-
-If the required information is not available, MediCore avoids generating an unsupported answer.
+### 🌟 What is this branch all about?
+MediCore is powered by trusted medical authorities like the **World Health Organization (WHO)**, **CDC**, **NHS**, and **ICMR**. This branch is the **intake pipeline** 🚜 that loads these authoritative files and prepares them for the system.
 
 ---
 
-## ✨ Features
+### 💡 Why do we need this in MediCore?
+Before an AI can answer questions about tuberculosis, stroke, diabetes, or dengue, the system must have a safe, repeatable way to import new guidelines into its library 📚.
 
-- 📄 Medical document processing
-- 🔎 Relevant information retrieval
-- 🧠 AI-generated answers based on available documents
-- 📑 Source and page information
-- 🚫 Handling of unsupported questions
-- 📊 Retrieval evaluation
-- 💬 Simple and easy-to-use interface
-- ⚡ Quick access to information from lengthy documents
+This branch provides the loaders that read PDF manuals and JSON guideline records and registers them into the active knowledge catalog.
 
 ---
 
-## 🛠️ Technologies Used
-
-- **Python** – Main development language
-- **PyMuPDF** – Medical PDF processing
-- **Sentence Transformers** – Text representation
-- **FAISS** – Relevant information retrieval
-- **Gemini** – Answer generation
-- **Streamlit** – User interface
+### ⚙️ How does it work in simple words?
+1. **Scan the Directory:** Checks the `documents/authoritative/` folder for clinical JSONs and PDFs 📂.
+2. **Read Metadata:** Gathers the issuing organization, title, version, and year 🏷️.
+3. **Ingest Content:** Loads every section, symptom list, and emergency protocol into structured Python data objects 📥.
+4. **Catalog Registration:** Adds the document to `documents/catalog.json` so the rest of MediCore knows it exists 📋.
 
 ---
 
-## 🎯 Project Objective
-
-The objective of MediCore is to make medical information **easier and faster to find** from lengthy reference documents.
-
-The project demonstrates the practical use of:
-
-- Retrieval-Augmented Generation
-- Natural Language Processing
-- Semantic Search
-- Document Processing
-- Artificial Intelligence
-- Information Retrieval
+### 🤝 How this branch contributes to MediCore
+- 🏥 **Official Authority Library:** Supplies MediCore with 9+ real-world authoritative guidelines.
+- 🔄 **Easy Updates:** Makes it simple to add new medical guidelines in the future.
+- 🛡️ **Verified Sources Only:** Ensures that only verified medical files enter the search pipeline.
 
 ---
 
-## 💡 Why MediCore?
-
-Sometimes even a simple health-related doubt can make us search through long articles, websites, and medical PDFs.
-
-We wanted to make that process easier by creating a system where users can **ask their question directly and quickly find relevant information from the available medical documents**.
-
-MediCore also shows where the information came from, making the answer easier to verify.
+### 🦄 What makes this branch unique?
+This branch is the **gateway for all clinical knowledge**. It handles file I/O, format parsing, and dataset registration for all medical resources.
 
 ---
 
-## 📊 Evaluation
-
-MediCore was tested using questions based on the available medical documents.
-
-| Evaluation | Result |
-|---|---:|
-| Top-1 Retrieval Accuracy | **100%** |
-| Top-3 Retrieval Accuracy | **100%** |
-
-Unsupported questions were also tested to check whether the system avoids providing information that is not available in the documents.
-
----
-
-## 👨‍💻 Project Status
-
-### ✅ Main System Completed
-
-MediCore can currently:
-
-- Process medical documents
-- Retrieve relevant information
-- Generate answers using retrieved content
-- Display source and page details
-- Handle unsupported questions
-- Provide a simple user interface
-
-The next step is to improve retrieval for more complex questions and expand the available medical documents.
-
----
-
-## 🔮 Future Scope
-
-- 📚 Add more medical documents
-- 📄 Support different document formats
-- 🔎 Improve retrieval for complex questions
-- 💬 Add conversation history
-- 🎨 Improve the user interface
-- 🌐 Make the application available online
-- 🏥 Expand coverage to more healthcare topics
-
----
-
-## 📖 Learning Reference
-
-The basic RAG concept was learned from **LangChain's RAG From Scratch** project.
-
-We used it to understand the basic idea of retrieving relevant information before generating an answer, and then applied the concept to our own healthcare-focused project, **MediCore**.
-
----
-
-## ⚠️ Disclaimer
-
-MediCore is an **academic project** created for educational and informational purposes.
-
-It is not intended to provide medical diagnosis, treatment, or professional medical advice.
-
-For medical concerns, users should consult a qualified healthcare professional.
-
----
-
-## ⭐ MediCore
-
-**Ask your question. Find the information. Know the source.**
+### ⚠️ Important Health Reminder
+MediCore is an educational and reference assistant. It does not replace the judgment of a licensed doctor. Always call your local emergency service in critical situations! 🚑
